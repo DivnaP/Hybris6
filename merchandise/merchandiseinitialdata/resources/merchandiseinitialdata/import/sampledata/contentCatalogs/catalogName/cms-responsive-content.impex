@@ -1,0 +1,87 @@
+# ImpEx for Importing CMS Content
+# Macros / Replacement Parameter definitions
+$contentCatalog=electronicsContentCatalog
+$contentCatalogName=Electronics Content Catalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$productCatalog=electronicsProductCatalog
+$productCatalogName=Electronics Product Catalog
+$productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$medias=medias(code, $contentCV);
+$mediaContainer=media(qualifier, $contentCV);
+
+# create navigation root node for my account & child nodes for the root node 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
+;MyAccountNavNode;;My Account Nav;SiteRootNode;;MyAccountNavNode
+;PersonalDetailsNavNode;;PersonalDetailsNavNode;MyAccountNavNode;;PersonalDetailsNavNode
+;UpdateEmailNavNode;;UpdateEmailNavNode;MyAccountNavNode;;UpdateEmailNavNode
+;PaymentDetailsNavNode;;PaymentDetailsNavNode;MyAccountNavNode;;PaymentDetailsNavNode
+;ChangePasswordNavNode;;ChangePasswordNavNode;MyAccountNavNode;;ChangePasswordNavNode
+;OrderHistoryNavNode;;OrderHistoryNavNode;MyAccountNavNode;;OrderHistoryNavNode
+;AddressBookNavNode;;AddressBookNavNode;MyAccountNavNode;;AddressBookNavNode
+;WishlistNavNode;;WishlistNavNode;MyAccountNavNode;;WishlistNavNode
+
+# create cms navigation entry for nvaigation child nodes
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+;PersonalDetailsNavNodeEntry;;PersonalDetailsNavNodeEntry;PersonalDetailsNavNode;PersonalDetailsLink;
+;UpdateEmailNavNodeEntry;;UpdateEmailNavNodeEntry;UpdateEmailNavNode;UpdateEmailLink;
+;ChangePasswordNavNodeEntry;;ChangePasswordNavNodeEntry;ChangePasswordNavNode;UpdatePasswordLink;
+;AddressBookNavNodeEntry;;AddressBookNavNodeEntry;AddressBookNavNode;AddressBookLink;
+;PaymentDetailsNavNodeEntry;;PaymentDetailsNavNodeEntry;PaymentDetailsNavNode;PaymentDetailsLink;
+;OrderHistoryNavNodeEntry;;OrderHistoryNavNodeEntry;OrderHistoryNavNode;OrderHistoryLink;
+;WishlistNavNodeEntry;;WishlistNavNodeEntry;WishlistNavNode;WishlistLink;
+
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow']
+;;AccountAddressBookLink;AccountAddressBookLink;/my-account/address-book;AccountAddressBookLink;AccountAddressBookLink;;;;
+;;AccountPaymentDetailsLink;AccountPaymentDetailsLink;/my-account/payment-details;AccountPaymentDetailsLink;AccountPaymentDetailsLink;;;;
+;;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;/my-account/payment-details;AccountManagePaymentDetailsLink;AccountManagePaymentDetailsLink;;;;
+;;AccountOrderHistoryLink;AccountOrderHistoryLink;/my-account/orders;AccountOrderHistoryLink;AccountOrderHistoryLink;;;;
+;;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;/my-account/orders;AccountViewOrderHistoryLink;AccountViewOrderHistoryLink;;;;
+# create cms link components for my account pages
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;target(code)[default='sameWindow']
+;;PersonalDetailsLink;PersonalDetailsLink;/my-account/update-profile;PersonalDetailsLink;
+;;UpdateEmailLink;UpdateEmailLink;/my-account/update-email;UpdateEmailLink;
+;;UpdatePasswordLink;UpdatePasswordLink;/my-account/update-password;UpdatePasswordLink;
+;;AddressBookLink;AddressBookLink;/my-account/address-book;AddressBookLink;
+;;PaymentDetailsLink;PaymentDetailsLink;/my-account/payment-details;PaymentDetailsLink;
+;;OrderHistoryLink;OrderHistoryLink;/my-account/orders;OrderHistoryLink;
+;;WishlistLink;WishlistLink;/my-account/wishlist;WishlistLink;
+
+# create navigation component for my account
+INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef)
+;;MyAccountComponent;My Account;accNavComponent;MyAccountComponent;MyAccountNavNode
+
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid,$contentCV)
+;;HeaderLinksSlot;MyAccountComponent
+
+
+
+
+
+
+#INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;page;actions(uid,$contentCV);&componentRef
+#;;AccountWishlistComponent;Account Wishlist Component;accountWishlistPage.jsp;;AccountWishlistComponent
+
+
+
+#INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
+#;;SideContent-wishlist;Side Content Slot for My Account Wishlist;true;AccountLeftNavigationComponent;;;
+#;;BodyContent-wishlist;Body Content Slot for My Account Wishlist;true;AccountWishlistComponent;;;
+# ContentSlotForPage
+#INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='orderConfirmationPage'];contentSlot(uid,$contentCV)[unique=true];;;
+#;;SideContent-wishlist;SideContent;;SideContent-wishlist;;;
+#;;BodyContent-wishlist;BodyContent;;BodyContent-wishlist;;;
+
+UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);
+
+;;BodyContent-wishlist;AccountWishlistComponent;
+
+
+
+
+INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+
+INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;showLanguageCurrency
