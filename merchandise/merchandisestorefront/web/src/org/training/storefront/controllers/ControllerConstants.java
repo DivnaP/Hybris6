@@ -25,6 +25,8 @@ import de.hybris.platform.acceleratorcms.model.components.SimpleResponsiveBanner
 import de.hybris.platform.acceleratorcms.model.components.SubCategoryListComponentModel;
 import de.hybris.platform.cms2.model.contents.components.CMSLinkComponentModel;
 import de.hybris.platform.cms2lib.model.components.ProductCarouselComponentModel;
+
+
 /**
  */
 public interface ControllerConstants
@@ -90,6 +92,7 @@ public interface ControllerConstants
 				String AccountEditAddressPage = "pages/account/accountEditAddressPage"; // NOSONAR
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage"; // NOSONAR
 				String AccountRegisterPage = "pages/account/accountRegisterPage"; // NOSONAR
+				String AccountWishlistPage = "pages/account/accountWishlistPage";
 			}
 
 			interface Checkout // NOSONAR

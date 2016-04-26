@@ -640,7 +640,7 @@ public class AccountPageController extends AbstractSearchPageController
 	}
 
 	@RequestMapping(value = "/wishlist", method = RequestMethod.GET)
-	@RequireHardLogIn
+
 	public String getWishlist(final Model model, @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
 			throws CMSItemNotFoundException
 	{
@@ -652,7 +652,7 @@ public class AccountPageController extends AbstractSearchPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(WISHLIST_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_WISHLIST));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		return getViewForPage(model);
+		return ControllerConstants.Views.Pages.Account.AccountWishlistPage;
 	}
 
 

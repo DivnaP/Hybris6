@@ -82,6 +82,7 @@
 	<%-- 	<script type="text/javascript" src="${commonResourcePath}/js/loadProductDetails.js"></script> --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/wishRemoveClick.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
+			<script type="text/javascript" src="${commonResourcePath}/js/applyVoucher.js"></script>
 		
 
 

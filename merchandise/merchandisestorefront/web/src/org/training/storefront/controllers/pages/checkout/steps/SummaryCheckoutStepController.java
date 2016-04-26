@@ -9,7 +9,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with hybris.
  *
- *  
+ *
  */
 package org.training.storefront.controllers.pages.checkout.steps;
 
@@ -27,13 +27,15 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.voucher.VoucherFacade;
+import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationException;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
-import org.training.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +45,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.training.storefront.controllers.ControllerConstants;
 
 
 @Controller
@@ -53,6 +58,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	private static final Logger LOGGER = Logger.getLogger(SummaryCheckoutStepController.class);
 
 	private static final String SUMMARY = "summary";
+	@Resource(name = "voucherFacade")
+	VoucherFacade voucherFacade;
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -80,8 +87,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		model.addAttribute("paymentInfo", cartData.getPaymentInfo());
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
-		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT.equals(getCheckoutFlowFacade()
-				.getSubscriptionPciOption());
+		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT
+				.equals(getCheckoutFlowFacade().getSubscriptionPciOption());
 		model.addAttribute("requestSecurityCode", Boolean.valueOf(requestSecurityCode));
 
 		model.addAttribute(new PlaceOrderForm());
@@ -95,13 +102,49 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		return ControllerConstants.Views.Pages.MultiStepCheckout.CheckoutSummaryPage;
 	}
 
+	@RequestMapping(value = "/addVoucher", method = RequestMethod.GET)
+	@ResponseBody
+	public String applyVoucher(final Model model, @RequestParam("code") final String code)
+	{
+		try
+		{
+			if (voucherFacade.checkVoucherCode(code))
+			{
+
+				voucherFacade.applyVoucher(code);
+				voucherFacade.releaseVoucher(code);
+
+				return voucherFacade.getVoucher(code).getValueString();
+				//	return true;
+			}
+		}
+		catch (final VoucherOperationException e1)
+		{
+			// YTODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return "Not valid";
+	}
 
 	@RequestMapping(value = "/placeOrder")
-	@RequireHardLogIn
+
 	public String placeOrder(@ModelAttribute("placeOrderForm") final PlaceOrderForm placeOrderForm, final Model model,
 			final HttpServletRequest request, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, // NOSONAR
 			InvalidCartException, CommerceCartModificationException
 	{
+
+
+		//final String code = (String) request.getAttribute("voucherInput");
+		/*
+		 * try { if (voucherFacade.checkVoucherCode(code)) { final List<VoucherData> voucherList = new
+		 * ArrayList<VoucherData>(); voucherList.add(voucherFacade.getVoucher(code));
+		 *
+		 * getCartFacade().getSessionCart().setAppliedVouchers(voucherList);
+		 *
+		 *
+		 * voucherFacade.releaseVoucher(code); } } catch (final VoucherOperationException e1) { // YTODO Auto-generated
+		 * catch block e1.printStackTrace(); }
+		 */
 		if (validateOrderForm(placeOrderForm, model))
 		{
 			return enterStep(model, redirectModel);
@@ -198,17 +241,17 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 
 		if (!getCheckoutFacade().containsTaxValues())
 		{
-			LOGGER.error(String
-					.format(
-							"Cart %s does not have any tax values, which means the tax cacluation was not properly done, placement of order can't continue",
-							cartData.getCode()));
+			LOGGER.error(String.format(
+					"Cart %s does not have any tax values, which means the tax cacluation was not properly done, placement of order can't continue",
+					cartData.getCode()));
 			GlobalMessages.addErrorMessage(model, "checkout.error.tax.missing");
 			invalid = true;
 		}
 
 		if (!cartData.isCalculated())
 		{
-			LOGGER.error(String.format("Cart %s has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
+			LOGGER.error(
+					String.format("Cart %s has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
 			GlobalMessages.addErrorMessage(model, "checkout.error.cart.notcalculated");
 			invalid = true;
 		}

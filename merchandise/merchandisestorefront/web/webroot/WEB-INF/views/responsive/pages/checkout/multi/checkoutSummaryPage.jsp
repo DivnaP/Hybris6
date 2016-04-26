@@ -35,10 +35,19 @@
                         <button id="placeOrder" type="submit" class="btn btn-primary btn-place-order btn-block">
                             <spring:theme code="checkout.summary.placeOrder" text="Place Order"/>
                         </button>
+                        
+                      
                     </form:form>
+                    
+                    
                 </div>
 			</ycommerce:testId>
 		</multi-checkout:checkoutSteps>
+		</br>
+		 <b> Voucher:</b>
+                        <input id="voucherInput" name="voucherInput" type="text" />
+                        <button class="btn btn-info" id="voucherBtn" onclick="applyVoucher()" >Apply voucher</button>
+                        <div id="voucherResult"></div>
     </div>
 
     <div class="col-sm-6">
