@@ -112,15 +112,15 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			{
 
 				voucherFacade.applyVoucher(code);
-				voucherFacade.releaseVoucher(code);
+				//voucherFacade.releaseVoucher(code);
 
 				return voucherFacade.getVoucher(code).getValueString();
-				//	return true;
+
 			}
 		}
 		catch (final VoucherOperationException e1)
 		{
-			// YTODO Auto-generated catch block
+
 			e1.printStackTrace();
 		}
 		return "Not valid";
@@ -133,18 +133,6 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			InvalidCartException, CommerceCartModificationException
 	{
 
-
-		//final String code = (String) request.getAttribute("voucherInput");
-		/*
-		 * try { if (voucherFacade.checkVoucherCode(code)) { final List<VoucherData> voucherList = new
-		 * ArrayList<VoucherData>(); voucherList.add(voucherFacade.getVoucher(code));
-		 *
-		 * getCartFacade().getSessionCart().setAppliedVouchers(voucherList);
-		 *
-		 *
-		 * voucherFacade.releaseVoucher(code); } } catch (final VoucherOperationException e1) { // YTODO Auto-generated
-		 * catch block e1.printStackTrace(); }
-		 */
 		if (validateOrderForm(placeOrderForm, model))
 		{
 			return enterStep(model, redirectModel);

@@ -13,9 +13,9 @@ function applyVoucher(){
 		success : function(data) {
 			if(data){
 				
-				location.reload();
-				$("#voucherResult").text(data);
 				
+				$("#voucherResult").text(data);
+				location.reload();
 				}
 		}
 	});

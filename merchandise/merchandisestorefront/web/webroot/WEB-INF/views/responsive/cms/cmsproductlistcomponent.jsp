@@ -10,8 +10,17 @@
 <div class="product-listing product-list row">
     <c:forEach items="${searchPageData.results}" var="product" varStatus="status">
         <product:productListerItem product="${product}"/>
-        <button id="wishlistBtn" onclick="wishClick(${product.code})" > Add to wishlist</button>
-        <button id="wishlistRemoveBtn" style="" onclick="wishRemoveClick(${product.code})" disabled >Remove from wishlist</button>
+        <sec:authorize ifNotGranted="ROLE_ANONYMOUS">
+							
+							 <c:if test="${not product.inWishlist}">
+							<button id="wishlistBtn" onclick="wishClick(${product.code})" > Add to wishlist</button>
+						
+							</c:if>
+							 <c:if test="${product.inWishlist}">
+								<button id="wishlistRemoveBtn" style="" onclick="wishRemoveClick(${product.code})" >Remove from wishlist</button>
+							</c:if>
+							
+							</sec:authorize>
     </c:forEach>
 </div>
 

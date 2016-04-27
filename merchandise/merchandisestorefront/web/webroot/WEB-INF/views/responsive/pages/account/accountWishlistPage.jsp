@@ -12,7 +12,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <spring:url value="/my-account/wishlist" var="wishlistUrl" />
 
-
+<template:page pageTitle="${pageTitle}">
 <div class="product-listing product-list row">
 	<c:forEach items="${searchPageData}" var="product" varStatus="status">
 		<product:productListerItem product="${product}" />
@@ -55,4 +55,4 @@
 
 	</c:forEach>
 </div>
-
+</template:page>
