@@ -87,6 +87,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.training.facades.customer.impl.CustomCustomerFacade;
 import org.training.facades.product.ProductWishlistConvertFacade;
 import org.training.facades.wishlist.impl.WishlistFacade;
 import org.training.storefront.controllers.ControllerConstants;
@@ -163,8 +164,8 @@ public class AccountPageController extends AbstractSearchPageController
 	@Resource(name = "userFacade")
 	private UserFacade userFacade;
 
-	@Resource(name = "customerFacade")
-	private CustomerFacade customerFacade;
+	@Resource(name = "customCustomerFacade")
+	private CustomCustomerFacade customCustomerFacade;
 
 	@Resource(name = "accountBreadcrumbBuilder")
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
@@ -392,7 +393,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		final List<TitleData> titles = userFacade.getTitles();
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final CustomerData customerData = customCustomerFacade.getCurrentCustomer();
 		if (customerData.getTitleCode() != null)
 		{
 			model.addAttribute("title", findTitleForCode(titles, customerData.getTitleCode()));
@@ -426,7 +427,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String editEmail(final Model model) throws CMSItemNotFoundException
 	{
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final CustomerData customerData = customCustomerFacade.getCurrentCustomer();
 		final UpdateEmailForm updateEmailForm = new UpdateEmailForm();
 
 		updateEmailForm.setEmail(customerData.getDisplayUid());
@@ -461,12 +462,12 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			try
 			{
-				customerFacade.changeUid(updateEmailForm.getEmail(), updateEmailForm.getPassword());
+				customCustomerFacade.changeUid(updateEmailForm.getEmail(), updateEmailForm.getPassword());
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
 						"text.account.profile.confirmationUpdated", null);
 
 				// Replace the spring security authentication with the new UID
-				final String newUid = customerFacade.getCurrentCustomer().getUid().toLowerCase();
+				final String newUid = customCustomerFacade.getCurrentCustomer().getUid().toLowerCase();
 				final Authentication oldAuthentication = SecurityContextHolder.getContext().getAuthentication();
 				final UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(newUid, null,
 						oldAuthentication.getAuthorities());
@@ -504,7 +505,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		final CustomerData customerData = customCustomerFacade.getCurrentCustomer();
 		final CustomUpdateProfileForm updateProfileForm = new CustomUpdateProfileForm();
 
 		updateProfileForm.setTitleCode(customerData.getTitleCode());
@@ -529,7 +530,7 @@ public class AccountPageController extends AbstractSearchPageController
 		getProfileValidator().validate(updateProfileForm, bindingResult);
 
 		String returnAction = REDIRECT_TO_UPDATE_PROFILE;
-		final CustomerData currentCustomerData = customerFacade.getCurrentCustomer();
+		final CustomerData currentCustomerData = customCustomerFacade.getCurrentCustomer();
 		final CustomerData customerData = new CustomerData();
 		customerData.setTitleCode(updateProfileForm.getTitleCode());
 		customerData.setFirstName(updateProfileForm.getFirstName());
@@ -551,7 +552,7 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			try
 			{
-				customerFacade.updateProfile(customerData);
+				customCustomerFacade.updateProfile(customerData);
 				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
 						"text.account.profile.confirmationUpdated", null);
 
@@ -596,7 +597,7 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				try
 				{
-					customerFacade.changePassword(updatePasswordForm.getCurrentPassword(), updatePasswordForm.getNewPassword());
+					customCustomerFacade.changePassword(updatePasswordForm.getCurrentPassword(), updatePasswordForm.getNewPassword());
 				}
 				catch (final PasswordMismatchException localException)
 				{
@@ -685,7 +686,7 @@ public class AccountPageController extends AbstractSearchPageController
 
 	protected AddressForm getPreparedAddressForm()
 	{
-		final CustomerData currentCustomerData = customerFacade.getCurrentCustomer();
+		final CustomerData currentCustomerData = customCustomerFacade.getCurrentCustomer();
 		final AddressForm addressForm = new AddressForm();
 		addressForm.setFirstName(currentCustomerData.getFirstName());
 		addressForm.setLastName(currentCustomerData.getLastName());
@@ -1009,7 +1010,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String paymentDetails(final Model model) throws CMSItemNotFoundException
 	{
-		model.addAttribute("customerData", customerFacade.getCurrentCustomer());
+		model.addAttribute("customerData", customCustomerFacade.getCurrentCustomer());
 		model.addAttribute("paymentInfoData", userFacade.getCCPaymentInfos(true));
 		storeCmsPageInModel(model, getContentPageForLabelOrId(PAYMENT_DETAILS_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
