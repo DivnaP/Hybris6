@@ -38,14 +38,24 @@
 		
 		
 	</bean>
+	
 <bean id="productInWishlistPopulator" class="org.training.facades.populators.ProductInWishlistPopulator">
 	<property name="wishlistFacade" ref="wishlistFacade"/>
 </bean>
-	 
+
+	 <bean id="customCustomerPopulator" class="org.training.facades.populators.CustomCustomerPopulator"/>
+	
+
 	 <bean parent="modifyPopulatorList">
         <property name="list" ref="productConverter"/>
         <property name="add"  ref="productInWishlistPopulator"/>
     </bean>
+    
+     <bean parent="modifyPopulatorList">
+        <property name="list" ref="customerConverter"/>
+        <property name="add"  ref="customCustomerPopulator"/>
+    </bean>
+    
     
 	<bean id="wishlistFacade" class="org.training.facades.wishlist.impl.WishlistFacade">
 	
@@ -54,6 +64,29 @@
            <property name="productService" ref="productService"/>
 	</bean>
 	
+	<bean id="customCustomerFacade" class="org.training.facades.customer.impl.CustomCustomerFacade" parent="defaultCustomerFacade">
+		<!-- <property name="userService" ref="userService"/> -->
+		<property name="customCustomerAccountService" ref="customCustomerAccountService"/>
+		<!-- <property name="commonI18NService" ref="commonI18NService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="commerceCartService" ref="commerceCartService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="userFacade" ref="userFacade"/>
+
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
+		<property name="customerReversePopulator" ref="customerReversePopulator"/>
+		<property name="customerConverter" ref="customerConverter"/>
+		<property name="addressConverter" ref="addressConverter"/>
+		<property name="titleConverter" ref="titleConverter"/>
+		<property name="creditCardPaymentInfoConverter" ref="creditCardPaymentInfoConverter"/>
+
+		<property name="customerNameStrategy" ref="customerNameStrategy"/>
+		<property name="passwordEncoderService" ref="passwordEncoderService"/>
+		<property name="orderFacade" ref="orderFacade"/>
+		<property name="cartCleanStrategy" ref="cartValidationStrategy" /> -->
+	</bean>
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">

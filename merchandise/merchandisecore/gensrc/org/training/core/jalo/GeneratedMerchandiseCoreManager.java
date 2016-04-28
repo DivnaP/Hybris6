@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Apr 27, 2016 9:36:42 AM                     ---
+ * --- Generated at Apr 28, 2016 2:19:02 PM                     ---
  * ----------------------------------------------------------------
  */
 package org.training.core.jalo;
@@ -14,6 +14,10 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
+import de.hybris.platform.jalo.user.Customer;
+import de.hybris.platform.jalo.user.User;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import org.training.core.constants.MerchandiseCoreConstants;
@@ -32,6 +36,9 @@ public abstract class GeneratedMerchandiseCoreManager extends Extension
 	static
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
+		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("birthdate", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.user.Customer", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -44,6 +51,42 @@ public abstract class GeneratedMerchandiseCoreManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.birthdate</code> attribute.
+	 * @return the birthdate
+	 */
+	public Date getBirthdate(final SessionContext ctx, final Customer item)
+	{
+		return (Date)item.getProperty( ctx, MerchandiseCoreConstants.Attributes.Customer.BIRTHDATE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.birthdate</code> attribute.
+	 * @return the birthdate
+	 */
+	public Date getBirthdate(final Customer item)
+	{
+		return getBirthdate( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.birthdate</code> attribute. 
+	 * @param value the birthdate
+	 */
+	public void setBirthdate(final SessionContext ctx, final Customer item, final Date value)
+	{
+		item.setProperty(ctx, MerchandiseCoreConstants.Attributes.Customer.BIRTHDATE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.birthdate</code> attribute. 
+	 * @param value the birthdate
+	 */
+	public void setBirthdate(final Customer item, final Date value)
+	{
+		setBirthdate( getSession().getSessionContext(), item, value );
 	}
 	
 	public ApparelProduct createApparelProduct(final SessionContext ctx, final Map attributeValues)

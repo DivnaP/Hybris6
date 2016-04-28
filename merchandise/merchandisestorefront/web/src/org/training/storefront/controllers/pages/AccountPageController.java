@@ -90,6 +90,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.training.facades.product.ProductWishlistConvertFacade;
 import org.training.facades.wishlist.impl.WishlistFacade;
 import org.training.storefront.controllers.ControllerConstants;
+import org.training.storefront.forms.CustomUpdateProfileForm;
 
 
 /**
@@ -504,12 +505,12 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		final UpdateProfileForm updateProfileForm = new UpdateProfileForm();
+		final CustomUpdateProfileForm updateProfileForm = new CustomUpdateProfileForm();
 
 		updateProfileForm.setTitleCode(customerData.getTitleCode());
 		updateProfileForm.setFirstName(customerData.getFirstName());
 		updateProfileForm.setLastName(customerData.getLastName());
-
+		updateProfileForm.setBirthdate(customerData.getBirthdate());
 		model.addAttribute("updateProfileForm", updateProfileForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
@@ -522,7 +523,7 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/update-profile", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updateProfile(final UpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
+	public String updateProfile(final CustomUpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getProfileValidator().validate(updateProfileForm, bindingResult);
@@ -533,6 +534,7 @@ public class AccountPageController extends AbstractSearchPageController
 		customerData.setTitleCode(updateProfileForm.getTitleCode());
 		customerData.setFirstName(updateProfileForm.getFirstName());
 		customerData.setLastName(updateProfileForm.getLastName());
+		customerData.setBirthdate(updateProfileForm.getBirthdate());
 		customerData.setUid(currentCustomerData.getUid());
 		customerData.setDisplayUid(currentCustomerData.getDisplayUid());
 
@@ -652,6 +654,7 @@ public class AccountPageController extends AbstractSearchPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(WISHLIST_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_WISHLIST));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		
 		return ControllerConstants.Views.Pages.Account.AccountWishlistPage;
 	}
 

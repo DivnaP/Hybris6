@@ -44,7 +44,6 @@ public class ProductWishlistConvertFacade
 		for (final ProductModel model1 : listModel)
 		{
 
-
 			listPoductData.add(getProductConverter().convert(model1));
 		}
 

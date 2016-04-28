@@ -7,7 +7,7 @@ function applyVoucher(){
 	$.ajax({
 		async : true,
 		type : "GET",
-		url : '/merchandisestorefront/electronics/en/checkout/multi/summary/addVoucher',
+		url : ACC.config.encodedContextPath+'/checkout/multi/summary/addVoucher',
 		data : "code=" + code,
 
 		success : function(data) {
