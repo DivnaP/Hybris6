@@ -29,7 +29,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a customer email.
  */
-public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel>
+public class CustomerEmailContext2 extends AbstractEmailContext<StoreFrontCustomerProcessModel>
 {
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;
@@ -37,12 +37,12 @@ public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustome
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getToEmail()
 	 */
-/*	@Override
+	@Override
 	public String getToEmail()
 	{
 		// YTODO Auto-generated method stub
 		return "divna.popovic@msg-global.com";
-	}*/
+	}
 	
 	@Override
 	public void init(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel, final EmailPageModel emailPageModel)

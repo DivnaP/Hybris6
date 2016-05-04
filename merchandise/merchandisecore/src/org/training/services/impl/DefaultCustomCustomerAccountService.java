@@ -2,11 +2,13 @@ package org.training.services.impl;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
+import de.hybris.platform.commerceservices.event.RegisterEvent;
 import de.hybris.platform.core.model.user.CustomerModel;
 
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.training.core.event.CustomRegisterEvent;
 import org.training.services.CustomCustomerAccountService;
 
 /**
@@ -39,4 +41,13 @@ public class DefaultCustomCustomerAccountService extends de.hybris.platform.comm
 		}
 		internalSaveCustomer(customerModel);
 	}
+	@Override
+	public void register(final CustomerModel customerModel, final String password) throws DuplicateUidException
+	{
+		registerCustomer(customerModel, password);
+		getEventService().publishEvent(initializeEvent(new RegisterEvent(), customerModel));
+
+		}
+	
+	
 }
