@@ -156,8 +156,8 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
 ;electronics_Email_Customer_Registration_Body;$emailPackageName.CustomerEmailContext
 ;electronics_Email_Customer_Registration_Subject;$emailPackageName.CustomerEmailContext
-;electronics_Email_Alert_Customer_Registration_Body;$emailPackageName.CustomerEmailContext2
-;electronics_Email_Alert_Customer_Registration_Subject;$emailPackageName.CustomerEmailContext2
+;electronics_Email_Alert_Customer_Registration_Body;$emailPackageName.CustomerAlertEmailContext
+;electronics_Email_Alert_Customer_Registration_Subject;$emailPackageName.CustomerAlertEmailContext
 
 
 # Preview Image for use in the CMS Cockpit

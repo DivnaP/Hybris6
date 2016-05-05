@@ -170,7 +170,7 @@
 	<bean id="customerEmailContext" class="org.training.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>
-<bean id="customerEmailContext2" class="org.training.facades.process.email.context.CustomerEmailContext2" parent="abstractEmailContext" scope="prototype" >
+<bean id="customerAlertEmailContext" class="org.training.facades.process.email.context.CustomerAlertEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>
 	<bean id="forgottenPasswordEmailContext" class="org.training.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >

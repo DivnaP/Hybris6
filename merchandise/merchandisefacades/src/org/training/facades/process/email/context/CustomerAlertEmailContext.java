@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Required;
 /**
  * Velocity context for a customer email.
  */
-public class CustomerEmailContext2 extends AbstractEmailContext<StoreFrontCustomerProcessModel>
+public class CustomerAlertEmailContext extends AbstractEmailContext<StoreFrontCustomerProcessModel>
 {
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;

@@ -105,7 +105,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		msgImportData.setProductCatalogName(MSG);
 
 		msgImportData.setContentCatalogNames(Arrays.asList(MSG));
-		msgImportData.setStoreNames(Arrays.asList(MSG));
+		msgImportData.setStoreNames(Arrays.asList("merchandise"));
 		importData.add(msgImportData);
 
 		getCoreDataImportService().execute(this, context, importData);
