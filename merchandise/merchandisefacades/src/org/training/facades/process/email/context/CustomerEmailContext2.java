@@ -23,6 +23,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
+import org.apache.commons.configuration.Configuration;
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -40,8 +41,9 @@ public class CustomerEmailContext2 extends AbstractEmailContext<StoreFrontCustom
 	@Override
 	public String getToEmail()
 	{
-		// YTODO Auto-generated method stub
-		return "divna.popovic@msg-global.com";
+		Configuration cfg = getConfigurationService().getConfiguration();
+		
+		return cfg.getString("mailto");
 	}
 	
 	@Override
@@ -49,6 +51,7 @@ public class CustomerEmailContext2 extends AbstractEmailContext<StoreFrontCustom
 	{
 		super.init(storeFrontCustomerProcessModel, emailPageModel);
 		customerData = getCustomerConverter().convert(getCustomer(storeFrontCustomerProcessModel));
+		
 	}
 
 	@Override

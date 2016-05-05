@@ -17,15 +17,15 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 # Templates for CMS Cockpit Page Edit
 UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 ;;CustomerRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
-;;CustomerAlertRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
+;;CustomerAlertRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerAlertRegistrationEmailTemplate.vm
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
 ;TopContent;;$wideContent;
 ;BottomContent;;$wideContent;
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CustomerAlertRegistrationEmailTemplate'];validComponentTypes(code)
-;SiteLogo;;;logo
-;TopContent;;$wideContent;
-;BottomContent;;$wideContent;
+;SiteLogo;;;
+;TopContent;;;
+;BottomContent;;;
 
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
@@ -152,14 +152,13 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
 ;;CustomerRegistrationEmail;Customer Registration Email;CustomerRegistrationEmailTemplate;true;
 ;;CustomerAlertRegistrationEmail;Customer Alert Registration Email;CustomerAlertRegistrationEmailTemplate;true;
-# CMS components velocity templates
+# Email velocity templates
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
 ;electronics_Email_Customer_Registration_Body;$emailPackageName.CustomerEmailContext
 ;electronics_Email_Customer_Registration_Subject;$emailPackageName.CustomerEmailContext
 ;electronics_Email_Alert_Customer_Registration_Body;$emailPackageName.CustomerEmailContext2
 ;electronics_Email_Alert_Customer_Registration_Subject;$emailPackageName.CustomerEmailContext2
-# Email velocity templates
-INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+
 
 # Preview Image for use in the CMS Cockpit
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
