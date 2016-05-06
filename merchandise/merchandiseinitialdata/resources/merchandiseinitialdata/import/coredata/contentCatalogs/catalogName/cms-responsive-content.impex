@@ -1,10 +1,32 @@
 #
 # Import the CMS content for the site
 #
-$contentCatalog=__CONTENT_CATALOG_NAME__
+$contentCatalog=electronicsContentCatalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-
+$jarResourceCms=jar:org.training.initialdata.constants.MerchandiseInitialDataConstants&/merchandiseinitialdata/import/sampledata/cockpits/cmscockpit
 # Import config properties into impex macros
 UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
 $jarResourceCms=$config-jarResourceCmsValue
 
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+;Section2A;;SocialNetworksComponent;narrow
+;Section2B;;SocialNetworksComponent;narrow
+
+
+INSERT_UPDATE SocialNetworksComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;title;text;linktext;Image(code, $contentCV)
+;;SocialNetwork1;Social Network Facebook;SocialNetwork1;Facebook;Facebook;https://www.facebook.com;FacebookPic
+;;SocialNetwork2;Social Network Linkedin;SocialNetwork2;Linkedin;LinkedIn;https://www.linkedin.com;LinkedinPic
+;;SocialNetwork3;Social Network Pintrest;SocialNetwork3;Pintrest;Pin it;https://www.pintrest.com;PintrestPic
+;;SocialNetwork4;Social Network Instagram;SocialNetwork4;Instagram;Insta;https://www.instagram.com;InstagramPic
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)[mode=append]
+;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;SocialNetwork1
+;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;SocialNetwork2
+;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;SocialNetwork3
+;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;SocialNetwork4
+
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+;;FacebookPic;text/jpg;facebook.png;$jarResourceCms/images/facebook.jpg
+;;PintrestPic;text/png;pintrest.png;$jarResourceCms/images/pintrest.png
+;;InstagramPic;text/jpg;insta.png;$jarResourceCms/images/insta.jpg
+;;LinkedinPic;text/jpg;linkedin.png;$jarResourceCms/images/linkedin.jpg
