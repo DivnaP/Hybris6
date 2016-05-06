@@ -34,16 +34,6 @@ public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustome
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;
 
-	/* (non-Javadoc)
-	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getToEmail()
-	 */
-/*	@Override
-	public String getToEmail()
-	{
-		// YTODO Auto-generated method stub
-		return "divna.popovic@msg-global.com";
-	}*/
-	
 	@Override
 	public void init(final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel, final EmailPageModel emailPageModel)
 	{

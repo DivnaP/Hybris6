@@ -20,8 +20,6 @@ package org.training.core.event;
  *
  *  
  */
-
-
 import de.hybris.platform.acceleratorservices.site.AbstractAcceleratorSiteEventListener;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
@@ -32,8 +30,6 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
 import org.springframework.beans.factory.annotation.Required;
-
-
 
 /**
  * Listener for customer registration events.
@@ -72,10 +68,6 @@ public class CustomRegistrationEventListener extends AbstractAcceleratorSiteEven
 	{
 		this.modelService = modelService;
 	}
-
-
-	
-
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.site.AbstractAcceleratorSiteEventListener#getSiteChannelForEvent(de.hybris.platform.servicelayer.event.events.AbstractEvent)
 	 */
