@@ -50,7 +50,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(InitialDataSystemSetup.class);
-	public static final String MSG = "electronicsContentCatalog";
+	public static final String MSG = "merchandiseContentCatalog";
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
@@ -112,69 +112,69 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
 
 		getSampleDataImportService().execute(this, context, importData);
-		/*
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/msgProductCatalog/catalog.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/msgProductCatalog/catalog_en.impex", true);
-		 * // Msg Content Catalog (core data) importImpexFile(context, IMPORT_PREFIX + CORE +
-		 * "/contentCatalogs/msgContentCatalog/catalog.impex", true); importImpexFile(context, IMPORT_PREFIX + CORE +
-		 * "/contentCatalogs/msgContentCatalog/catalog_en.impex", true); // Msg CMS Content (core data)
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/contentCatalogs/msgContentCatalog/cms-content.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/contentCatalogs/msgContentCatalog/cms-content_en.impex",
-		 * true);
-		 */
+		
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/merchandiseProductCatalog/catalog.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/merchandiseProductCatalog/catalog_en.impex", true);
+		//   merchandise Content Catalog (core data) 
+		   importImpexFile(context, IMPORT_PREFIX + CORE +
+		  "/contentCatalogs/merchandiseContentCatalog/catalog.impex", true); importImpexFile(context, IMPORT_PREFIX + CORE +
+		  "/contentCatalogs/merchandiseContentCatalog/catalog_en.impex", true); 
+		  // Msg CMS Content (core data)
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/contentCatalogs/merchandiseContentCatalog/cms-content.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/contentCatalogs/merchandiseContentCatalog/cms-content_en.impex",
+		  true);
+		
 		// Msg Store (core data)
-		/*
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/msg/store.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + CORE + "/stores/msg/store_en.impex", true); importImpexFile(context, IMPORT_PREFIX + CORE +
-		 * "/stores/msg/store_en.impex", true); // Msg Site (core data) importImpexFile(context, IMPORT_PREFIX + CORE +
-		 * "/stores/msg/site.impex", true); importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/msg/site_en.impex",
-		 * true); ​ importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/msg/solr.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/msg/solr_en.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + CORE + "/stores/msg/solr.impex", true); ​ importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/categories.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/categories_en.impex", true); importImpexFile(context, IMPORT_PREFIX +
-		 * SAMPLE + "/productCatalogs/msgProductCatalog/categories-classifications.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/categories-classifications_en.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/categories-media.impex",
-		 * true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/classifications-units.impex", true); importImpexFile(context, IMPORT_PREFIX
-		 * + SAMPLE + "/productCatalogs/msgProductCatalog/products.impex", true); importImpexFile(context, IMPORT_PREFIX +
-		 * SAMPLE + "/productCatalogs/msgProductCatalog/products_en.impex", true); importImpexFile(context, IMPORT_PREFIX
-		 * + SAMPLE + "/productCatalogs/msgProductCatalog/products-classifications_en.impex", true); ​
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/products-media.impex",
-		 * true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/products-pos-stocklevels.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/products-prices.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/products-relations.impex", true); importImpexFile(context, IMPORT_PREFIX +
-		 * SAMPLE + "/productCatalogs/msgProductCatalog/products-stocklevels.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/products-tax.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/reviews.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/suppliers.impex", true);
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/msgProductCatalog/suppliers_en.impex",
-		 * true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/productCatalogs/msgProductCatalog/suppliers-media.impex", true);
-		 */
+	
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/store.impex", true); 
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/store_en.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/store_en.impex", true); 
+		  // merchandise Site (core data) 
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/site.impex", true); 
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/site_en.impex",true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/solr.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/solr_en.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/solr.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/categories.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/productCatalogs/merchandiseProductCatalog/categories_en.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX +SAMPLE + "/productCatalogs/merchandiseProductCatalog/categories-classifications.impex", true); 
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/categories-classifications_en.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/categories-media.impex",true); 
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/classifications-units.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX+ SAMPLE + "/productCatalogs/merchandiseProductCatalog/products.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX +SAMPLE + "/productCatalogs/merchandiseProductCatalog/products_en.impex", true); 
+		 importImpexFile(context, IMPORT_PREFIX+ SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-classifications_en.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-media.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-pos-stocklevels.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-prices.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-relations.impex", true); 
+		  importImpexFile(context, IMPORT_PREFIX +SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-stocklevels.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/products-tax.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/reviews.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/suppliers.impex", true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/productCatalogs/merchandiseProductCatalog/suppliers_en.impex",true);
+		  importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/productCatalogs/merchandiseProductCatalog/suppliers-media.impex", true);
+		 
 		// Msg Content Catalog (sample data)
-		/*
-		 * importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/msgContentCatalog/cms-content.impex",
-		 * true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/contentCatalogs/msgContentCatalog/cms-content_en.impex", true); ​ importImpexFile(context, IMPORT_PREFIX +
-		 * SAMPLE + "/stores/msg/btg.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/jobs.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/points-of-service.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/points-of-service_en.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/points-of-service-media.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/promotions.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/promotions_en.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE +
-		 * "/stores/msg/solr.impex", true); importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/stores/msg/solr_en.impex",
-		 * true); importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/stores/msg/warehouses.impex", true); ​ //Responsive
-		 * stuff importImpexFile(context, IMPORT_PREFIX + CORE +
-		 * "/contentCatalogs/msgContentCatalog/cms-responsive-content.impex", true); importImpexFile(context,
-		 * IMPORT_PREFIX + CORE + "/stores/msg/store-responsive.impex", true);
-		 */
-		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/catalogName/cms-responsive-content.impex", true);
-		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/catalogName/cms-responsive-content_en.impex", true);
+	
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-content.impex",true);
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-content_en.impex", true); 
+	 importImpexFile(context, IMPORT_PREFIX +SAMPLE +"/stores/merchandise/btg.impex", true);
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/jobs.impex", true); 
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/points-of-service.impex", true);
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/points-of-service_en.impex", true);
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/points-of-service-media.impex", true);
+		 importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/promotions.impex", true);
+       importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/promotions_en.impex", true); 
+       importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/solr.impex", true);
+       importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/solr_en.impex",true);
+       importImpexFile(context, IMPORT_PREFIX + SAMPLE +"/stores/merchandise/warehouses.impex", true); 
+       //Responsive stuff 
+		  importImpexFile(context, IMPORT_PREFIX + CORE +"/contentCatalogs/merchandiseContentCatalog/cms-responsive-content.impex", true);
+        importImpexFile(context, IMPORT_PREFIX + CORE + "/stores/merchandise/store-responsive.impex", true);
+		
+		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-responsive-content.impex", true);
+		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-responsive-content_en.impex", true);
 
 		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 		if (this.getBooleanSystemSetupParameter(context, ACTIVATE_SOLR_CRON_JOBS))

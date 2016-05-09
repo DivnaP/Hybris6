@@ -11,6 +11,7 @@ import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+
 /**
  * @author popovicd
  *
@@ -31,12 +32,10 @@ public class CustomUpdateProfileForm extends UpdateProfileForm
 	/**
 	 * @param birthdate
 	 *           the birthdate to set
-	 * @throws ParseException 
+	 * @throws ParseException
 	 */
 	public void setBirthdate(final Date birthdate) throws ParseException
-	{	
-	/*	SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
-	this.birthdate=dt1.parse(dt1.format(birthdate));*/
+	{
 		this.birthdate = birthdate;
 	}
 }
