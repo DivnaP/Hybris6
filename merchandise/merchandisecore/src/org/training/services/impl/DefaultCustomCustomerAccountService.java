@@ -41,13 +41,7 @@ public class DefaultCustomCustomerAccountService extends de.hybris.platform.comm
 		}
 		internalSaveCustomer(customerModel);
 	}
-	@Override
-	public void register(final CustomerModel customerModel, final String password) throws DuplicateUidException
-	{
-		registerCustomer(customerModel, password);
-		getEventService().publishEvent(initializeEvent(new RegisterEvent(), customerModel));
 
-		}
 	
 	
 }

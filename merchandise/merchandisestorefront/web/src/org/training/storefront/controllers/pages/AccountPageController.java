@@ -25,7 +25,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateEmailForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdatePasswordForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateProfileForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.AddressValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.EmailValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.PasswordValidator;
@@ -34,7 +33,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.Addres
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
@@ -61,6 +59,8 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -501,13 +501,13 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/update-profile", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String editProfile(final Model model) throws CMSItemNotFoundException
+	public String editProfile(final Model model) throws CMSItemNotFoundException, ParseException
 	{
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
 		final CustomerData customerData = customCustomerFacade.getCurrentCustomer();
 		final CustomUpdateProfileForm updateProfileForm = new CustomUpdateProfileForm();
-
+	
 		updateProfileForm.setTitleCode(customerData.getTitleCode());
 		updateProfileForm.setFirstName(customerData.getFirstName());
 		updateProfileForm.setLastName(customerData.getLastName());

@@ -13,7 +13,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <template:errorSpanField path="${path}">
 	<ycommerce:testId code="LoginPage_Item_${idKey}">
 		<label class="control-label ${labelCSS}" for="${idKey}">
@@ -24,9 +24,10 @@
 		</label>
 			
 		<spring:theme code="${placeholder}" var="placeHolderMessage" />
-		<%--  type="${inputCSS}" --%> 	
+		<%--   --%> 	
+	
 		<form:input id="${idKey}" path="${path}"
-				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" />
-						
+		tabindex="${tabindex}" name="dateProperty" autocomplete="${autocomplete}" placeholder="${placeHolderMessage}" type="${inputCSS}" />
+			
 	</ycommerce:testId>
 </template:errorSpanField>
