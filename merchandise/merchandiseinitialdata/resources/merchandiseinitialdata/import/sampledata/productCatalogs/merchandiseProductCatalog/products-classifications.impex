@@ -43,7 +43,7 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVe
 ;29925;1140/450;1100;<ignore>;
 ;3429337;<ignore>;<ignore>;177.8;
 ;454831;<ignore>;5000;<ignore>;
-
+;666;110.5x64.5x44.3mm;270g;<ignore>;
 
 # Classification: Lens system (1094)
 $feature1=@Fixed focal length, 5748[$clAttrModifiers];  # Fixed focal length in millimeter (mm)
@@ -104,6 +104,7 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
  ;832382;Black;
  ;832386;"White&amp;Black"
  ;848855;Black;
+ ;666;Black;
 
 
 # Classification: Technical details (635)

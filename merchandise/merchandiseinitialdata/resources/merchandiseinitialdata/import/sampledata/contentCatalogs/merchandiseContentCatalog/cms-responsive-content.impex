@@ -12,6 +12,7 @@ $mediaContainer=media(qualifier, $contentCV);
 $siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $productResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/productCatalogs/$productCatalog
 $jarResourceCms=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/cockpits/cmscockpit
+$jarResourceCmsPic=jar:org.training.initialdata.constants.MerchandiseInitialDataConstants&/merchandiseinitialdata/import/sampledata/cockpits/cmscockpit
 
 # create navigation root node for my account & child nodes for the root node 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -88,6 +89,17 @@ INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter
 
 
 #################    HOME PAGE START     #################
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
+;;FacebookPic;text/jpg;facebook.png;$jarResourceCmsPic/images/facebook.jpg
+;;PintrestPic;text/png;pintrest.png;$jarResourceCmsPic/images/pintrest.png
+;;InstagramPic;text/jpg;insta.png;$jarResourceCmsPic/images/insta.jpg
+;;LinkedinPic;text/jpg;linkedin.png;$jarResourceCmsPic/images/linkedin.jpg
+
+INSERT_UPDATE SocialNetworksComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;title;text;linktext;Image(code, $contentCV)
+;;SocialNetwork1;Social Network Facebook;SocialNetwork1;Facebook;Facebook;https://www.facebook.com;FacebookPic
+;;SocialNetwork2;Social Network Linkedin;SocialNetwork2;Linkedin;LinkedIn;https://www.linkedin.com;LinkedinPic
+;;SocialNetwork3;Social Network Pintrest;SocialNetwork3;Pintrest;Pin it;https://www.pintrest.com;PintrestPic
+;;SocialNetwork4;Social Network Instagram;SocialNetwork4;Instagram;Insta;https://www.instagram.com;InstagramPic
 
 ###  Home page splash Slot 1  #######
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
@@ -107,7 +119,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 ;;ElectronicsHompageLightFamTextBannerComponent;Electronics Homepage Light Family Text Banner Component;/Open-Catalogue/Cameras/CameraAccessories-%26-Supplies/CameraLenses/c/588;ElectronicsHompageLightFamTextBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section2ASlot-Homepage;true;ElectronicsHompageLightFamBannerComponent,ElectronicsHompageLightFamTextBannerComponent
+;;Section2ASlot-Homepage;true;ElectronicsHompageLightFamBannerComponent,ElectronicsHompageLightFamTextBannerComponent,SocialNetwork1,SocialNetwork2
 
 #### Home section 2B #######
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
@@ -117,7 +129,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 ;;ElectronicsHompageCamcordersChildBannerComponent;Electronics Homepage Light Family Banner Component Child;/Open-Catalogue/Cameras/Hand-held-Camcorders/c/584;ElectronicsHompageCamcordersChildBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section2BSlot-Homepage;true;ElectronicsHompageCamcordersChildBannerComponent,ElectronicsHompageCamcordersBannerComponent
+;;Section2BSlot-Homepage;true;ElectronicsHompageCamcordersChildBannerComponent,ElectronicsHompageCamcordersBannerComponent,SocialNetwork3,SocialNetwork4
 ## Home section 2C
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;Section2CSlot-Homepage;

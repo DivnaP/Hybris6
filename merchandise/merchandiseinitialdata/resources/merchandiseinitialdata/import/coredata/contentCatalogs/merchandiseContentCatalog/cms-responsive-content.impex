@@ -13,3 +13,4 @@ $jarResourceCms=jar:org.training.initialdata.constants.MerchandiseInitialDataCon
 
 INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
 ;;OrderConfirmationPageTemplate;Order Confirmation Page Template;checkout/checkoutConfirmationLayoutPage;ContentPage
+

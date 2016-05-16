@@ -27,3 +27,4 @@ INSERT_UPDATE Category;code[unique=true];$superCategories;allowedPrincipals(uid)
  ;brand_745;brands
  ;brand_750;brands
  ;brand_2171;brands
+ ;brand_666;brands

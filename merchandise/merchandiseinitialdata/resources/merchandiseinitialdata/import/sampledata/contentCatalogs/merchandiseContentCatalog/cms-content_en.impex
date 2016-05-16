@@ -54,6 +54,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;IciduBrandCategoryLink;"Icidu"
 ;;KingstonBrandCategoryLink;"Kingston"
 ;;KodakBrandCategoryLink;"Kodak"
+;;PanasonicBrandCategoryLink;"Panasonic"
 ;;LinkedInLink;"Linked In"
 ;;PowerSuppliesCategoryLink;"Power Supplies"
 ;;SamsungBrandCategoryLink;"Samsung"

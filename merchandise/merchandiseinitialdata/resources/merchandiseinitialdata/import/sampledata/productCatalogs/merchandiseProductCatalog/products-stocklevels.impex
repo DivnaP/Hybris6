@@ -283,9 +283,10 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;15;warehouse_w;notSpecified;1;0;0;0;5864567;0
 ;22;warehouse_n;notSpecified;1;0;0;0;5864583;0
 ;29;warehouse_s;notSpecified;1;0;0;0;5897548;00
-
+;15;warehouse_w;notSpecified;1;0;0;0;666;0
 
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;666;;666:warehouse_w;electro
 ;23355;;23355:warehouse_s;electro
 ;29925;;29925:warehouse_e;electro
 ;65652;;65652:warehouse_w;electro

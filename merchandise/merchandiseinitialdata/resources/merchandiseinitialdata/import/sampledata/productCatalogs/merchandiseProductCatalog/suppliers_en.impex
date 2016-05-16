@@ -13,6 +13,7 @@ $lang=en
 
 # Create Categories
 UPDATE Category;code[unique=true];$catalogVersion;name[lang=en];description[lang=en]
+ ;brand_666;;Panasonic;Panasonic
  ;brand_1;;HP;HP;
  ;brand_10;;Canon;Canon;
  ;brand_103;;NEC;NEC;
@@ -30,3 +31,4 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=en];description[lang
  ;brand_88;;Kodak;Kodak;
  ;brand_91;;Logitech;Logitech;
  ;brands;;Brands;Brands;
+ 

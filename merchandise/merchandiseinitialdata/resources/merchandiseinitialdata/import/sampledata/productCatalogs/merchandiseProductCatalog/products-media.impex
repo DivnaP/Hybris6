@@ -601,6 +601,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;515Wx515H;/515Wx515H/918735-2738.jpg;$siteResource/images/515Wx515H/918735-2738.jpg;;;images
 ;515Wx515H;/515Wx515H/932577-4639.jpg;$siteResource/images/515Wx515H/932577-4639.jpg;;;images
 ;515Wx515H;/515Wx515H/932643-3964.jpg;$siteResource/images/515Wx515H/932643-3964.jpg;;;images
+;300Wx300H;/300Wx300H/panasonic-tz101-schwarz-1-300x300.jpg;$siteResource/images/300Wx300H/panasonic-tz101-schwarz-1-300x300.jpg;;;images
 ;300Wx300H;/300Wx300H/107701-5509.jpg;$siteResource/images/300Wx300H/107701-5509.jpg;;;images
 ;300Wx300H;/300Wx300H/1099285-1035.jpg;$siteResource/images/300Wx300H/1099285-1035.jpg;;;images
 ;300Wx300H;/300Wx300H/1099413-3203.jpg;$siteResource/images/300Wx300H/1099413-3203.jpg;;;images
@@ -1002,6 +1003,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;300Wx300H;/300Wx300H/918735-2738.jpg;$siteResource/images/300Wx300H/918735-2738.jpg;;;images
 ;300Wx300H;/300Wx300H/932577-4639.jpg;$siteResource/images/300Wx300H/932577-4639.jpg;;;images
 ;300Wx300H;/300Wx300H/932643-3964.jpg;$siteResource/images/300Wx300H/932643-3964.jpg;;;images
+;96Wx96H;/96Wx96H/panasonic-tz101-schwarz-1-90x90.jpg;$siteResource/images/96Wx96H/panasonic-tz101-schwarz-1-90x90.jpg;;;images
 ;96Wx96H;/96Wx96H/107701-5509.jpg;$siteResource/images/96Wx96H/107701-5509.jpg;;;images
 ;96Wx96H;/96Wx96H/1099285-1035.jpg;$siteResource/images/96Wx96H/1099285-1035.jpg;;;images
 ;96Wx96H;/96Wx96H/1099413-3203.jpg;$siteResource/images/96Wx96H/1099413-3203.jpg;;;images
@@ -2210,6 +2212,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;30Wx30H;/30Wx30H/932643-3964.jpg;$siteResource/images/30Wx30H/932643-3964.jpg;;;images
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;panasonic-tz101-schwarz-1-300x300;/300Wx300H/panasonic-tz101-schwarz-1-300x300.jpg,/96Wx96H/panasonic-tz101-schwarz-1-90x90.jpg;
 ;897853_8772;/1200Wx1200H/897853_8772.jpg,/515Wx515H/897853_8772.jpg,/300Wx300H/897853_8772.jpg,/96Wx96H/897853_8772.jpg,/65Wx65H/897853_8772.jpg,/30Wx30H/897853_8772.jpg;
 ;553637-934;/515Wx515H/553637-934.jpg,/300Wx300H/553637-934.jpg,/96Wx96H/553637-934.jpg,/65Wx65H/553637-934.jpg,/30Wx30H/553637-934.jpg;
 ;779866-8097;/515Wx515H/779866-8097.jpg,/300Wx300H/779866-8097.jpg,/96Wx96H/779866-8097.jpg,/65Wx65H/779866-8097.jpg,/30Wx30H/779866-8097.jpg;
@@ -2616,6 +2619,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 
 
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;666;/300Wx300H/panasonic-tz101-schwarz-1-300x300.jpg;/96Wx96H/panasonic-tz101-schwarz-1-90x90.jpg;;;;;panasonic-tz101-schwarz-1-300x300,panasonic-tz101-schwarz-1-300x300;
 ;23210;/300Wx300H/23210.jpg;/96Wx96H/23210.jpg;;/515Wx515H/23210.jpg,/515Wx515H/23213.jpg,/515Wx515H/23231.jpg,/515Wx515H/65652.jpg,/65Wx65H/23210.jpg,/65Wx65H/23213.jpg,/65Wx65H/23231.jpg,/65Wx65H/65652.jpg,/30Wx30H/23210.jpg,/30Wx30H/23213.jpg,/30Wx30H/23231.jpg,/30Wx30H/65652.jpg;/300Wx300H/23210.jpg,/300Wx300H/23213.jpg,/300Wx300H/23231.jpg,/300Wx300H/65652.jpg;/96Wx96H/23210.jpg,/96Wx96H/23213.jpg,/96Wx96H/23231.jpg,/96Wx96H/65652.jpg;23210,23213,23231,65652;
 ;337981;/300Wx300H/337981-398.jpg;/96Wx96H/337981-398.jpg;;/515Wx515H/337981-398.jpg,/65Wx65H/337981-398.jpg,/30Wx30H/337981-398.jpg;/300Wx300H/337981-398.jpg;/96Wx96H/337981-398.jpg;337981-398;
 ;489702;/300Wx300H/489702-7474.jpg;/96Wx96H/489702-7474.jpg;;/515Wx515H/489702-7474.jpg,/65Wx65H/489702-7474.jpg,/30Wx30H/489702-7474.jpg;/300Wx300H/489702-7474.jpg;/96Wx96H/489702-7474.jpg;489702-7474;

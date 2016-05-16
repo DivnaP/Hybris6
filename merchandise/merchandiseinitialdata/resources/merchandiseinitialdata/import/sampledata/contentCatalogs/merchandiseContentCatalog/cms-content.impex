@@ -35,6 +35,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;StoreFinderLink;Store Finder Link;/store-finder;StoreFinderLink;StoreFinderLink;;;;
 ;;LoginLink;Login Link;/login;LoginLink;LoginLink;;;;
 ;;AllBrandsCategoryLink;All Brands Link;/Brands/c/brands;AllBrandsCategoryLink;AllBrandsCategoryLink;;brands;;
+;;PanasonicBrandCategoryLink;Panasonic Link;/Brands/Panasonic/c/brand_666;PanasonicBrandCategoryLink;PanasonicBrandCategoryLink;;brand_666;;
 ;;SonyBrandCategoryLink;Sony Link;/Brands/Sony/c/brand_5;SonyBrandCategoryLink;SonyBrandCategoryLink;;brand_5;;
 ;;CanonBrandCategoryLink;Canon Link;/Brands/Canon/c/brand_10;CanonBrandCategoryLink;CanonBrandCategoryLink;;brand_10;;
 ;;KodakBrandCategoryLink;Kodak Link;/Brands/Kodak/c/brand_88;KodakBrandCategoryLink;KodakBrandCategoryLink;;brand_88;;
@@ -236,7 +237,7 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 ;SiteRootNode;;SiteRootNode;root;;SiteRootNode
 ;ElectronicsNavNode;;Electronics Site;SiteRootNode;HomepageNavLink;ElectronicsNavNode
 ;BrandsNavNode;;Brand Links;ElectronicsNavNode;AllBrandsCategoryLink;BrandsNavNode
-;BrandLinksNavNode;;Brand Links;BrandsNavNode;CanonBrandCategoryLink,SonyBrandCategoryLink,KodakBrandCategoryLink,SamsungBrandCategoryLink,ToshibaBrandCategoryLink,FujifilmBrandCategoryLink;BrandLinksNavNode
+;BrandLinksNavNode;;Brand Links;BrandsNavNode;CanonBrandCategoryLink,SonyBrandCategoryLink,KodakBrandCategoryLink,SamsungBrandCategoryLink,ToshibaBrandCategoryLink,FujifilmBrandCategoryLink,PanasonicBrandCategoryLink;BrandLinksNavNode
 ;AccessoryBrandLinksNavNode;;Accessory Brand Links;BrandsNavNode;KingstonBrandCategoryLink,IciduBrandCategoryLink,TDKBrandCategoryLink,SweexBrandCategoryLink;AccessoryBrandLinksNavNode
 ;DigitalCameraTypesNavNode;;Digital Camera Type Links;DigitalCamerasNavNode;DigitalCompactsCategoryLink,DigitalSLRCategoryLink;DigitalCameraTypesNavNode
 ;CamerasNavNode;;Cameras Category;ElectronicsNavNode;DigitalCamerasCategoryLink,FilmCamerasCategoryLink;CamerasNavNode
@@ -397,6 +398,7 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
 ;;ElectronicsHomepageProductCarouselComponent;Electronics Homepage Product Carousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;ElectronicsHomepageProductCarouselComponent
 
+
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section1Slot-Homepage;Section1 Slot for Homepage;true;BrandsGaloreBanner
 ;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;CanonPowershotBannerComponent,SonyCybershotBannerComponent,KodakEasyshareBannerComponent,SonyDSCBannerComponent
@@ -414,6 +416,17 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section3-Homepage;Section3;;Section3Slot-Homepage
 ;;Section4-Homepage;Section4;;Section4Slot-Homepage
 ;;Section5-Homepage;Section5;;Section5Slot-Homepage
+
+#INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+#;Section2A;;SocialNetworksComponent;narrow
+#;Section2B;;SocialNetworksComponent;narrow
+
+
+#INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)[mode=append]
+#;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;SocialNetwork1
+#;;Section2ASlot-Homepage;Section2A Slot for Homepage;true;SocialNetwork2
+#;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;SocialNetwork3
+#;;Section2BSlot-Homepage;Section2B Slot for Homepage;true;SocialNetwork4
 
 ###### Electronics Camera Accessories and Supplies Category Landing Page ######
 
