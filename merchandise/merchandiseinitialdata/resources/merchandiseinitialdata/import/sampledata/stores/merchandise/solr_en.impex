@@ -2,16 +2,16 @@
 
 # Macros / Replacement Parameter definitions
 $indexedType=merchandiseProductType
+$solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $facetSearchConfigName=merchandiseIndex
 $contentCatalogName=merchandiseContentCatalog
-
-$solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
 $contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
 $productCatalog=merchandiseProductCatalog
 $productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
 
 # Language
 $lang=en
+
 UPDATE SolrIndexedProperty;name[unique=true];$solrIndexedType;displayName[lang=$lang]
  ;Colour of product, 1766;;"Color";
  ;Lens type, 472   ;;"Lens type";

@@ -25,8 +25,7 @@
                 <attribute qualifier="image" type="Media">
                     <description>Image of social network</description>
                     <persistence type="property" />
-                </attribute>
-            
+                </attribute>           
                 <attribute type="localized:java.lang.String" qualifier="linktext">
                     <modifiers read="true" write="true" search="true" optional="true" />
                     <persistence type="property" />

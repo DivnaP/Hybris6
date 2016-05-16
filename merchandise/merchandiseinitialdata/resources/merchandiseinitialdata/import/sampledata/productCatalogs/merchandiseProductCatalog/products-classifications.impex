@@ -8,7 +8,7 @@ $productCatalogName=merchandise ProductCatalog
 $classificationCatalog=ElectronicsClassification
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$clAttrModifiers=system='$ElectronicsClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator
+$clAttrModifiers=system='ElectronicsClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
 
 # Insert Product Classifications
 
@@ -37,12 +37,12 @@ $feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin
 $feature2=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
 $feature3=@Height  max , 6486[$clAttrModifiers];  # Height (max)in millimeter (mm)
 INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
- ;1099285;<ignore>;2000;<ignore>;
- ;1687508;<ignore>;1700;<ignore>;
- ;23355;<ignore>;320;<ignore>;
- ;29925;1140/450;1100;<ignore>;
- ;3429337;<ignore>;<ignore>;177.8;
- ;454831;<ignore>;5000;<ignore>;
+;1099285;<ignore>;2000;<ignore>;
+;1687508;<ignore>;1700;<ignore>;
+;23355;<ignore>;320;<ignore>;
+;29925;1140/450;1100;<ignore>;
+;3429337;<ignore>;<ignore>;177.8;
+;454831;<ignore>;5000;<ignore>;
 
 
 # Classification: Lens system (1094)

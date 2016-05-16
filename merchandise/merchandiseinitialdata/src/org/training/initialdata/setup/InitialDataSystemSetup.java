@@ -50,7 +50,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 {
 	@SuppressWarnings("unused")
 	private static final Logger LOG = Logger.getLogger(InitialDataSystemSetup.class);
-	public static final String MSG = "merchandiseContentCatalog";
+	public static final String MSG = "merchandise";
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
@@ -102,7 +102,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		final List<ImportData> importData = new ArrayList<ImportData>();
 
 		final ImportData msgImportData = new ImportData();
-		msgImportData.setProductCatalogName(MSG);
+		msgImportData.setProductCatalogName("merchandise");
 
 		msgImportData.setContentCatalogNames(Arrays.asList(MSG));
 		msgImportData.setStoreNames(Arrays.asList("merchandise"));
@@ -112,8 +112,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
 
 		getSampleDataImportService().execute(this, context, importData);
-		
-		  importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/merchandiseProductCatalog/catalog.impex", true);
+		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+	/*	  importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/merchandiseProductCatalog/catalog.impex", true);
 		  importImpexFile(context, IMPORT_PREFIX + CORE + "/productCatalogs/merchandiseProductCatalog/catalog_en.impex", true);
 		//   merchandise Content Catalog (core data) 
 		   importImpexFile(context, IMPORT_PREFIX + CORE +
@@ -175,8 +175,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		
 		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-responsive-content.impex", true);
 		importImpexFile(context, IMPORT_PREFIX + SAMPLE + "/contentCatalogs/merchandiseContentCatalog/cms-responsive-content_en.impex", true);
-
-		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+*/
+	
 		if (this.getBooleanSystemSetupParameter(context, ACTIVATE_SOLR_CRON_JOBS))
 		{
 			this.logInfo(context, String.format("Activating solr index for [%s]", MSG));

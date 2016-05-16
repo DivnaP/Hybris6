@@ -2,12 +2,12 @@
 
 # Macros / Replacement Parameter definitions
 $productCatalog=merchandiseProductCatalog
-$storeName=__CONTENT_CATALOG_NAME__
+$storeName=merchandise
 $productCatalogName=Merchandise Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
 $medias=medias(code, $catalogVersion)
-$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/store/$storeName
+$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/stores/$storeName
 
 # Create medias
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)

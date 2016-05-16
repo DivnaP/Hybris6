@@ -1,0 +1,4 @@
+$productCatalog=merchandiseProductCatalog
+$productCatalogName=Merchandise Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$superCategories=superCategories(code, $catalogVersion)

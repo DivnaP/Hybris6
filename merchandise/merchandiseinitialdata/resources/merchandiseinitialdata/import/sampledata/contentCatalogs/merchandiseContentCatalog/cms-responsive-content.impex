@@ -1,14 +1,17 @@
 # ImpEx for Importing CMS Content
 # Macros / Replacement Parameter definitions
-$contentCatalog=electronicsContentCatalog
-$contentCatalogName=Electronics Content Catalog
+$contentCatalog=merchandiseContentCatalog
+$contentCatalogName=Merchandise Content Catalog
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
-$productCatalog=electronicsProductCatalog
-$productCatalogName=Electronics Product Catalog
+$productCatalog=merchandiseProductCatalog
+$productCatalogName=Merchandise Product Catalog
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 
 $medias=medias(code, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
+$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$productResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/productCatalogs/$productCatalog
+$jarResourceCms=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/cockpits/cmscockpit
 
 # create navigation root node for my account & child nodes for the root node 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);links(&linkRef);&nodeRef
@@ -68,9 +71,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 #;;SideContent-wishlist;SideContent;;SideContent-wishlist;;;
 #;;BodyContent-wishlist;BodyContent;;BodyContent-wishlist;;;
 
-UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);
-
-;;BodyContent-wishlist;AccountWishlistComponent;
+#UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef);
+#;;BodyContent-wishlist;AccountWishlistComponent;
 
 
 

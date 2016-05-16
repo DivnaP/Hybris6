@@ -7,7 +7,7 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 $defaultLanguage=en
 $storeUid=merchandise
 $siteUid=merchandise
-$promoGrp=__DEFAULT_PROMO_GRP__
+$promoGrp=electronicsPromoGrp
 $siteMapUrlLimitPerFile=50000
 
 $siteMapLangCur=enEur

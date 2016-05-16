@@ -7,7 +7,7 @@ $productCatalogName=Merchandise ProductCatalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $thumbnail=thumbnail(code, $catalogVersion)
 $picture=picture(code, $catalogVersion)
-$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/productCatalogs/$productCatalog
+$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/productCatalogs/$productCatalog
 
 
 # Import Category Media

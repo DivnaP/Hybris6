@@ -8,7 +8,7 @@ $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCata
 $picture=media(code, $contentCV);
 $wideContent=CMSImageComponent,BannerComponent
 $jarResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import
-$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/contentCatalogs/$contentCatalog
+$siteResource=jar:org.training.initialdata.setup.InitialDataSystemSetup&/merchandiseinitialdata/import/sampledata/contentCatalogs/$contentCatalog
 
 # Language
 $lang=en
