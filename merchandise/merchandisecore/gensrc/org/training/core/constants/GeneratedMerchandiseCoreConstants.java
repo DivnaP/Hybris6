@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 5, 2016 2:38:43 PM                      ---
+ * --- Generated at May 19, 2016 3:34:01 PM                     ---
  * ----------------------------------------------------------------
  */
 package org.training.core.constants;
@@ -19,6 +19,7 @@ public class GeneratedMerchandiseCoreConstants
 		public static final String APPARELPRODUCT = "ApparelProduct".intern();
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
+		public static final String CONTACTSENDEMAILPROCESS = "ContactSendEmailProcess".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 	}

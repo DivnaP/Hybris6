@@ -60,6 +60,7 @@ import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -465,7 +466,7 @@ public class AccountPageControllerTest
 	}
 
 	@Test
-	public void shouldGetUpdateProfile() throws CMSItemNotFoundException
+	public void shouldGetUpdateProfile() throws CMSItemNotFoundException, ParseException
 	{
 		final String profilePage = accountController.editProfile(page);
 

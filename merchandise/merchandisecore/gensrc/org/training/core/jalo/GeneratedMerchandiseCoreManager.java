@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 5, 2016 2:38:43 PM                      ---
+ * --- Generated at May 19, 2016 3:34:01 PM                     ---
  * ----------------------------------------------------------------
  */
 package org.training.core.jalo;
@@ -24,6 +24,7 @@ import org.training.core.constants.MerchandiseCoreConstants;
 import org.training.core.jalo.ApparelProduct;
 import org.training.core.jalo.ApparelSizeVariantProduct;
 import org.training.core.jalo.ApparelStyleVariantProduct;
+import org.training.core.jalo.ContactSendEmailProcess;
 import org.training.core.jalo.ElectronicsColorVariantProduct;
 
 /**
@@ -165,6 +166,32 @@ public abstract class GeneratedMerchandiseCoreManager extends Extension
 	public ApparelStyleVariantProduct createApparelStyleVariantProduct(final Map attributeValues)
 	{
 		return createApparelStyleVariantProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ContactSendEmailProcess createContactSendEmailProcess(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( MerchandiseCoreConstants.TC.CONTACTSENDEMAILPROCESS );
+			return (ContactSendEmailProcess)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ContactSendEmailProcess : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ContactSendEmailProcess createContactSendEmailProcess(final Map attributeValues)
+	{
+		return createContactSendEmailProcess( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final SessionContext ctx, final Map attributeValues)

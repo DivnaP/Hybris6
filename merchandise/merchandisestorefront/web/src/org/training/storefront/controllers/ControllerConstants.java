@@ -78,6 +78,10 @@ public interface ControllerConstants
 
 		interface Pages
 		{
+			interface Contact{
+				String ContactPage = "pages/contact/contactPage";
+				//
+			}
 			interface Account // NOSONAR
 			{
 				String AccountLoginPage = "pages/account/accountLoginPage"; // NOSONAR

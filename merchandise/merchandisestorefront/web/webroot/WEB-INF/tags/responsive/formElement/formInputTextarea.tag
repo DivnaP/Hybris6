@@ -25,8 +25,7 @@
 			
 		<spring:theme code="${placeholder}" var="placeHolderMessage" />
 			
-		<form:input cssClass="${inputCSS} form-control" id="${idKey}" path="${path}"
-				tabindex="${tabindex}" autocomplete="${autocomplete}" placeholder="${placeHolderMessage} "/>
-						
+		
+			<form:textarea path="${path}" cssClass="${inputCSS} form-control" placeholder="${placeHolderMessage}"/>			
 	</ycommerce:testId>
 </template:errorSpanField>

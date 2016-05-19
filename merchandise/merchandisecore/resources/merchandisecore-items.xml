@@ -49,7 +49,25 @@
 		</itemtype>
 
 		<!-- TypeGroups are for structure of this file only -->
+	<typegroup name="Processes">
+			<itemtype code="ContactSendEmailProcess" autocreate="true"
+				generate="true" extends="StoreFrontCustomerProcess" jaloclass="org.training.core.jalo.ContactSendEmailProcess">
+				<attributes>
+					<attribute qualifier="body" type="java.lang.String">
+						<persistence type="property" />
+					
+					</attribute>
+					<attribute qualifier="subject" type="java.lang.String">
+						<persistence type="property" />
+					
+					</attribute>
+				
+				</attributes>
+			</itemtype>
 
+			
+
+		</typegroup>
 		<typegroup name="Apparel">
 			<itemtype code="ApparelProduct" extends="Product"
 				autocreate="true" generate="true" jaloclass="org.training.core.jalo.ApparelProduct">

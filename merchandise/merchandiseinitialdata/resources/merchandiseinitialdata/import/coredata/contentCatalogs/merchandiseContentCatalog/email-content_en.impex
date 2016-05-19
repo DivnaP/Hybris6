@@ -13,6 +13,8 @@ $lang=en
 
 # CMS components and Email velocity templates
 UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;electronics_Contact_Send_Email_Body;"Customer sendEmail Body";$emailResource/email-contactSendEmailBody.vm
+;electronics_Contact_Send_Email_Subject;"Customer send Email Subject";$emailResource/email-contactSendEmailSubject.vm
 ;electronics_Email_Customer_Registration_Body;"Customer Registration Email Body";$emailResource/email-customerRegistrationBody.vm
 ;electronics_Email_Customer_Registration_Subject;"Customer Registration Email Subject";$emailResource/email-customerRegistrationSubject.vm
 ;electronics_Email_Alert_Customer_Registration_Body;"Customer Registration Alert Email Body";$emailResource/email-customerAlertRegistrationBody.vm
@@ -46,6 +48,7 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;electronics_Email_Ready_For_Pickup_Subject;"Ready For Pickup Email Subject";$emailResource/email-readyForPickupSubject.vm
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+;;ContactSendEmail;"customerservices@hybris.com";"Email from Customer"
 ;;CustomerRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
 ;;CustomerAlertRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
  ;;DeliverySentEmail;"customerservices@hybris.com";"Customer Services Team"

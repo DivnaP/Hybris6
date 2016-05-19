@@ -50,6 +50,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;PaymentDetailsLink;PaymentDetailsLink;/my-account/payment-details;PaymentDetailsLink;
 ;;OrderHistoryLink;OrderHistoryLink;/my-account/orders;OrderHistoryLink;
 ;;WishlistLink;WishlistLink;/my-account/wishlist;WishlistLink;
+;;ContactUsLink;Contact Us Link;/contactus/contact;ContactUsLink;
 
 # create navigation component for my account
 INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef)

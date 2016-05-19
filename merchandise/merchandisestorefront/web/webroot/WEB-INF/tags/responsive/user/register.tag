@@ -12,12 +12,14 @@
 
 <div class="headline">
 	<spring:theme code="register.new.customer" />
+	<br>
 </div>
 <p>
 	<spring:theme code="register.description" />
 </p>
 
 <form:form method="post" commandName="customRegisterForm" action="${action}">
+
 	<formElement:formSelectBox idKey="register.title"
 		labelKey="register.title" selectCSSClass="form-control"
 		path="titleCode" mandatory="true" skipBlank="false"

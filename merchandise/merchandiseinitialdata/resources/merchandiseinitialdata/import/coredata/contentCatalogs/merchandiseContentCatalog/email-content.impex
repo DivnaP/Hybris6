@@ -12,6 +12,7 @@ $jarResourceCms=$config-jarResourceCmsValue
 $emailPackageName=$config-emailContextPackageName
 # Email page Template
 INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;ContactSendEmailTemplate;Customer send Email Template;true;contactSendEmail;electronics_Contact_Send_Email_Subject;electronics_Contact_Send_Email_Body;EmailPage
 ;;CustomerRegistrationEmailTemplate;Customer Registration Email Template;true;customerRegistrationEmail;electronics_Email_Customer_Registration_Subject;electronics_Email_Customer_Registration_Body;EmailPage
 ;;CustomerAlertRegistrationEmailTemplate;Customer Alert Registration Email Template;true;customerAlertRegistrationEmail;electronics_Email_Alert_Customer_Registration_Subject;electronics_Email_Alert_Customer_Registration_Body;EmailPage
 ;;ForgottenPasswordEmailTemplate;Forgotten Password Email Template;true;forgottenPasswordEmail;electronics_Email_Forgotten_Password_Subject;electronics_Email_Forgotten_Password_Body;EmailPage
@@ -28,6 +29,7 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 
 # Templates for CMS Cockpit Page Edit
 UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;ContactSendEmailTemplate;$jarResourceCms/structure-view/structure_contactSendEmailTemplate.vm
 ;;CustomerRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
 ;;CustomerAlertRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerAlertRegistrationEmailTemplate.vm
 ;;ForgottenPasswordEmailTemplate;$jarResourceCms/structure-view/structure_forgottenPasswordEmailTemplate.vm
@@ -49,7 +51,10 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;SiteLogo;;;
 ;TopContent;;;
 ;BottomContent;;;
-
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ContactSendEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;
+;TopContent;;;
+;BottomContent;;;
 INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];validComponentTypes(code)
 ;SiteLogo;;;logo
 ;TopContent;;$wideContent;
@@ -120,6 +125,10 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;SiteLogo-CustomerAlertRegistrationEmail;SiteLogo;;EmailSiteLogoSlot;true
 ;;TopContent-CustomerAlertRegistrationEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-CustomerAlertRegistrationEmail;BottomContent;;EmailBottomSlot;true
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ContactSendEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ContactSendEmail;SiteLogo;;EmailSiteLogoSlot;true
+;;TopContent-ContactSendEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-ContactSendEmail;BottomContent;;EmailBottomSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ForgottenPasswordEmail;SiteLogo;;EmailSiteLogoSlot;true
@@ -173,6 +182,7 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 # Email Pages
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+;;ContactSendEmail;Contact send Email;ContactSendEmailTemplate;true;
 ;;CustomerRegistrationEmail;Customer Registration Email;CustomerRegistrationEmailTemplate;true;
 ;;CustomerAlertRegistrationEmail;Customer Alert Registration Email;CustomerAlertRegistrationEmailTemplate;true;
 ;;ForgottenPasswordEmail;Forgotten Password Email;ForgottenPasswordEmailTemplate;true;
@@ -196,6 +206,8 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;electronics-CMSParagraphComponent-template;java.util.Map
 # Email velocity templates
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;electronics_Contact_Send_Email_Body;$emailPackageName.ContactSendEmailContext
+;electronics_Contact_Send_Email_Subject;$emailPackageName.ContactSendEmailContext
 ;electronics_Email_Customer_Registration_Body;$emailPackageName.CustomerEmailContext
 ;electronics_Email_Customer_Registration_Subject;$emailPackageName.CustomerEmailContext
 ;electronics_Email_Alert_Customer_Registration_Body;$emailPackageName.CustomerAlertEmailContext

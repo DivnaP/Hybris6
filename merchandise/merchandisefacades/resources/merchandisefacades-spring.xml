@@ -170,6 +170,9 @@
 	<bean id="customerEmailContext" class="org.training.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>
+	<bean id="contactSendEmailContext" class="org.training.facades.process.email.context.ContactSendEmailContext" parent="abstractEmailContext" scope="prototype" >
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
 <bean id="customerAlertEmailContext" class="org.training.facades.process.email.context.CustomerAlertEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>

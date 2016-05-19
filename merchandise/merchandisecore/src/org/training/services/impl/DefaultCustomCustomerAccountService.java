@@ -2,13 +2,14 @@ package org.training.services.impl;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
+import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
 import de.hybris.platform.commerceservices.event.RegisterEvent;
 import de.hybris.platform.core.model.user.CustomerModel;
 
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.training.core.event.CustomRegisterEvent;
+import org.training.core.event.ContactUsEvent;
 import org.training.services.CustomCustomerAccountService;
 
 /**
@@ -44,4 +45,24 @@ public class DefaultCustomCustomerAccountService extends de.hybris.platform.comm
 
 	
 	
+	@Override
+	public void sendEmail(String body, String subject) 
+	{
+		CustomerModel customerModel;
+		customerModel=(getUserService().getCurrentUser()!=null)? (CustomerModel) getUserService().getCurrentUser():new CustomerModel();
+	
+		getEventService().publishEvent(myInitializeEvent(new ContactUsEvent(), customerModel,body,subject));
+	}
+
+	protected AbstractCommerceUserEvent myInitializeEvent(final ContactUsEvent event, final CustomerModel customerModel, final String body, final String subject)
+	{
+		event.setBaseStore(getBaseStoreService().getCurrentBaseStore());
+		event.setSite(getBaseSiteService().getCurrentBaseSite());
+		event.setCustomer(customerModel);
+		event.setLanguage(getCommonI18NService().getCurrentLanguage());
+		event.setCurrency(getCommonI18NService().getCurrentCurrency());
+		event.setSubject(subject);
+		event.setBody(body);
+		return event;
+	}
 }

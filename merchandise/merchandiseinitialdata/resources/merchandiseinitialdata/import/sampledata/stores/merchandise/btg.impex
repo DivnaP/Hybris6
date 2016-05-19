@@ -9,7 +9,7 @@ $productCatalogVersion=catalogVersion(catalog(id[default=$productCatalog]),versi
 $contentCatalogVersion=catalogVersion(catalog(id[default=$contentCatalog]),version[default='Staged'])[unique=true]
 
 INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);active[default=true];scope(code)[default=ONLINE];$contentCatalogVersion
-;electronicsCameraSegment;Camera Cross Selling Segment;electronics
+;electronicsCameraSegment;Camera Cross Selling Segment;merchandise
 
 INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCatalogVersion);ruleType(code);$contentCatalogVersion
 ;electronicsCameraRule;Camera Rule;electronicsCameraSegment;ORDER
@@ -40,7 +40,7 @@ INSERT_UPDATE BtgSegmentRestriction;uid[unique=true];outputActionDefinition(uid,
 # Configuration 1: Regular Customer Segment
 ##################################################################
 INSERT_UPDATE BTGSegment;uid[unique=true];name;sites(uid);active[default=true];scope(code)[default=ONLINE];$contentCatalogVersion
-;electronicsRegularCustomerSegment;Regular Customer Segment;electronics
+;electronicsRegularCustomerSegment;Regular Customer Segment;merchandise
 
 INSERT_UPDATE BTGRule;uid[unique=true];code;segment(uid, $contentCatalogVersion);ruleType(code);$contentCatalogVersion
 ;electronicsRegularCustomerRule;Regular Customer Rule;electronicsRegularCustomerSegment;ORDER
