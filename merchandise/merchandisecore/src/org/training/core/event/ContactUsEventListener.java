@@ -6,13 +6,11 @@ package org.training.core.event;
 import de.hybris.platform.acceleratorservices.site.AbstractAcceleratorSiteEventListener;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
-
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
-
-import org.training.core.model.ContactSendEmailProcessModel;
 import org.training.core.event.ContactUsEvent;
+import org.training.core.model.ContactSendEmailProcessModel;
 
 /**
  * @author popovicd

@@ -13,6 +13,7 @@
 <%-- <div class="headline">
 	<spring:theme code="contact.title" />
 </div> --%>
+<div class="col-sm-6">
 <form:form method="get" commandName="contactForm" action="/merchandisestorefront/merchandise/en/contactus/sendEmail">
 	<br>
 	<formElement:formInputBox idKey="contact.firstName"
@@ -33,15 +34,17 @@
 	<formElement:formInputTextarea idKey="contact.message"
 		labelKey="contact.message" path="message" inputCSS="form-control"
 		mandatory="true" />
-
-	<div class="form-actions clearfix">
+<div class="col-sm-3">
+	<div class="form-actions clearfix" align="right">
 		
-			<button type="submit" class="btn btn-default btn-block">
+			<button  type="submit" class="btn btn-default btn-block">
 				Send
 			</button>
-		
+			
+		</div>
+			<c:if test=" ${ not empty sendEmailMessage}">${sendEmailMessage}</c:if>
 	</div>
 </form:form>
-
+</div>
 
 </template:page>

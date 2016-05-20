@@ -18,5 +18,5 @@ public interface CustomCustomerAccountService extends CustomerAccountService
 	void updateCustomProfile(CustomerModel customerModel, String titleCode, String name, String login, Date date)
 			throws DuplicateUidException;
 	
-	void sendEmail(String body, String subject);
+	void sendEmail(String body, String subject,String email, String firstName, String lastName);
 }

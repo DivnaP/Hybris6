@@ -17,7 +17,7 @@ import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
 import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.commerceservices.model.process.StoreFrontCustomerProcessModel;
+
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -25,7 +25,7 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 import org.apache.commons.configuration.Configuration;
 import org.springframework.beans.factory.annotation.Required;
-import org.training.core.model.ContactSendEmailProcessModel;
+import org.training.core.model.*;
 
 
 /**
@@ -35,6 +35,7 @@ public class ContactSendEmailContext extends AbstractEmailContext<ContactSendEma
 {
 	private Converter<UserModel, CustomerData> customerConverter;
 	private CustomerData customerData;
+	String from;
 
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getToEmail()
@@ -47,14 +48,15 @@ public class ContactSendEmailContext extends AbstractEmailContext<ContactSendEma
 		return cfg.getString("contactmailto");
 	}
 	/* (non-Javadoc)
-	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getToDisplayName()
+	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getFromEmail()
 	 */
-/*	@Override
-	public String getToDisplayName()
+	@Override
+	public String getFromEmail()
 	{
-		// YTODO Auto-generated method stub
-		return "ooki";
-	}*/
+		
+		return customerData.getUid();
+	}
+
 	@Override
 	public void init(final ContactSendEmailProcessModel contactSendEmailProcessModel, final EmailPageModel emailPageModel)
 	{
@@ -62,8 +64,8 @@ public class ContactSendEmailContext extends AbstractEmailContext<ContactSendEma
 		customerData = getCustomerConverter().convert(getCustomer(contactSendEmailProcessModel));
 		put("subject",contactSendEmailProcessModel.getSubject());
 		put("body",contactSendEmailProcessModel.getBody());
-	
-		
+	//  from = emailPageModel.getFromEmail();
+	  
 	}
 
 	@Override

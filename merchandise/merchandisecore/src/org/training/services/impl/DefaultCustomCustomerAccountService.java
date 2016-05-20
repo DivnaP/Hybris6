@@ -1,4 +1,5 @@
 package org.training.services.impl;
+
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
@@ -12,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.training.core.event.ContactUsEvent;
 import org.training.services.CustomCustomerAccountService;
 
+
 /**
  * 
  */
@@ -20,12 +22,13 @@ import org.training.services.CustomCustomerAccountService;
  * @author popovicd
  *
  */
-public class DefaultCustomCustomerAccountService extends de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService implements CustomCustomerAccountService 
+public class DefaultCustomCustomerAccountService extends
+		de.hybris.platform.commerceservices.customer.impl.DefaultCustomerAccountService implements CustomCustomerAccountService
 {
 	@Deprecated
 	@Override
-	public void updateCustomProfile(final CustomerModel customerModel, final String titleCode, final String name, final String login,
-			final Date date) throws DuplicateUidException
+	public void updateCustomProfile(final CustomerModel customerModel, final String titleCode, final String name,
+			final String login, final Date date) throws DuplicateUidException
 	{
 		validateParameterNotNullStandardMessage("customerModel", customerModel);
 
@@ -43,18 +46,29 @@ public class DefaultCustomCustomerAccountService extends de.hybris.platform.comm
 		internalSaveCustomer(customerModel);
 	}
 
-	
-	
+
+
 	@Override
-	public void sendEmail(String body, String subject) 
+	public void sendEmail(String body, String subject, String email, String firstName, String lastName)
 	{
 		CustomerModel customerModel;
-		customerModel=(getUserService().getCurrentUser()!=null)? (CustomerModel) getUserService().getCurrentUser():new CustomerModel();
-	
-		getEventService().publishEvent(myInitializeEvent(new ContactUsEvent(), customerModel,body,subject));
+		if (!getUserService().isAnonymousUser(getUserService().getCurrentUser()))
+		{
+			customerModel = (CustomerModel) getUserService().getCurrentUser();
+
+		}
+		else
+		{
+			customerModel = new CustomerModel();
+			customerModel.setUid(email);
+			customerModel.setName(firstName + " " + lastName);
+		}
+
+		getEventService().publishEvent(myInitializeEvent(new ContactUsEvent(), customerModel, body, subject));
 	}
 
-	protected AbstractCommerceUserEvent myInitializeEvent(final ContactUsEvent event, final CustomerModel customerModel, final String body, final String subject)
+	protected AbstractCommerceUserEvent myInitializeEvent(final ContactUsEvent event, final CustomerModel customerModel,
+			final String body, final String subject)
 	{
 		event.setBaseStore(getBaseStoreService().getCurrentBaseStore());
 		event.setSite(getBaseSiteService().getCurrentBaseSite());

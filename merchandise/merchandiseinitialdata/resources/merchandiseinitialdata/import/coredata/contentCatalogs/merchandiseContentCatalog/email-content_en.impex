@@ -48,7 +48,7 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;electronics_Email_Ready_For_Pickup_Subject;"Ready For Pickup Email Subject";$emailResource/email-readyForPickupSubject.vm
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
-;;ContactSendEmail;"customerservices@hybris.com";"Email from Customer"
+;;ContactSendEmail;;"Email from Customer"
 ;;CustomerRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
 ;;CustomerAlertRegistrationEmail;"customerservices@hybris.com";"Customer Services Team"
  ;;DeliverySentEmail;"customerservices@hybris.com";"Customer Services Team"
