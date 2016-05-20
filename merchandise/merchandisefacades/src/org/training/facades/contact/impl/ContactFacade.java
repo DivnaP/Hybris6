@@ -98,9 +98,7 @@ public class ContactFacade implements ContactFacadeInterface
 	{
 		event.setBaseStore(getBaseStoreService().getCurrentBaseStore());
 		event.setSite(getBaseSiteService().getCurrentBaseSite());
-	
-		event.setLanguage(getCommonI18NService().getCurrentLanguage());
-		
+		event.setLanguage(getCommonI18NService().getCurrentLanguage());	
 		event.setSubject(subject);
 		event.setBody(body);
 		event.setName(name);

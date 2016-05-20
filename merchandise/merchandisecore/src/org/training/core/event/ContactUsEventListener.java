@@ -81,13 +81,11 @@ public class ContactUsEventListener extends AbstractAcceleratorSiteEventListener
 
 		cepm.setSite(event.getSite());
 		cepm.setLanguage(event.getLanguage());
-
 		cepm.setStore(event.getBaseStore());
 		cepm.setBody(event.getBody());
 		cepm.setSubject(event.getSubject());
 		cepm.setName(event.getName());
 		cepm.setEmail(event.getEmail());
-
 		getModelService().save(cepm);
 		getBusinessProcessService().startProcess(cepm);
 

@@ -27,6 +27,7 @@ import org.training.storefront.controllers.ControllerConstants;
 
 import org.training.storefront.forms.ContactForm;
 
+
 /**
  * @author popovicd
  *
@@ -51,7 +52,7 @@ public class ContactUsController extends AbstractSearchPageController
 
 	@Resource(name = "contactFacade")
 	private ContactFacade contactFacade;
-	
+
 	@RequestMapping(value = "/contactus/contact", method = RequestMethod.GET)
 
 	public String getContactPage(final Model model, @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
@@ -61,23 +62,22 @@ public class ContactUsController extends AbstractSearchPageController
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_CONTACT));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		CustomerData cd = null;
-		ContactForm contactForm = new ContactForm();
+		
 		if (!customCustomerFacade.isAnonymus())
 		{
-
-			cd = customCustomerFacade.getCurrentCustomer();
+			CustomerData cd = customCustomerFacade.getCurrentCustomer();
+			ContactForm contactForm = new ContactForm();
 			contactForm.setFirstName(cd.getFirstName());
 			contactForm.setLastName(cd.getLastName());
 			contactForm.setEmail(cd.getUid());
 			model.addAttribute(contactForm);
 		}
-	
+
 		else
 			model.addAttribute(new ContactForm());
-		
+
 		return ControllerConstants.Views.Pages.Contact.ContactPage;
-	
+
 	}
 
 	@RequestMapping(value = "/contactus/sendEmail", method = RequestMethod.POST)
@@ -91,11 +91,11 @@ public class ContactUsController extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_CONTACT));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-		
-	  contactFacade.sendEmail(contactForm.getSubject(),contactForm.getMessage(),contactForm.getEmail(),contactForm.getFirstName()+" "+contactForm.getLastName());
+		contactFacade.sendEmail(contactForm.getSubject(), contactForm.getMessage(), contactForm.getEmail(),
+				contactForm.getFirstName() + " " + contactForm.getLastName());
 
 		model.addAttribute(new ContactForm());
-	
+
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "contact.info.success", null);
 		return REDIRECT_PREFIX + "/";
 	}
