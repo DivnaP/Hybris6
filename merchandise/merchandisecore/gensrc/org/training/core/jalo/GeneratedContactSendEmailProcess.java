@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 20, 2016 10:42:33 AM                    ---
+ * --- Generated at May 20, 2016 2:17:47 PM                     ---
  * ----------------------------------------------------------------
  */
 package org.training.core.jalo;
@@ -24,12 +24,18 @@ public abstract class GeneratedContactSendEmailProcess extends StoreFrontCustome
 	public static final String BODY = "body";
 	/** Qualifier of the <code>ContactSendEmailProcess.subject</code> attribute **/
 	public static final String SUBJECT = "subject";
+	/** Qualifier of the <code>ContactSendEmailProcess.name</code> attribute **/
+	public static final String NAME = "name";
+	/** Qualifier of the <code>ContactSendEmailProcess.email</code> attribute **/
+	public static final String EMAIL = "email";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>(StoreFrontCustomerProcess.DEFAULT_INITIAL_ATTRIBUTES);
 		tmp.put(BODY, AttributeMode.INITIAL);
 		tmp.put(SUBJECT, AttributeMode.INITIAL);
+		tmp.put(NAME, AttributeMode.INITIAL);
+		tmp.put(EMAIL, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -72,6 +78,78 @@ public abstract class GeneratedContactSendEmailProcess extends StoreFrontCustome
 	public void setBody(final String value)
 	{
 		setBody( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ContactSendEmailProcess.email</code> attribute.
+	 * @return the email
+	 */
+	public String getEmail(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, EMAIL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ContactSendEmailProcess.email</code> attribute.
+	 * @return the email
+	 */
+	public String getEmail()
+	{
+		return getEmail( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ContactSendEmailProcess.email</code> attribute. 
+	 * @param value the email
+	 */
+	public void setEmail(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, EMAIL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ContactSendEmailProcess.email</code> attribute. 
+	 * @param value the email
+	 */
+	public void setEmail(final String value)
+	{
+		setEmail( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ContactSendEmailProcess.name</code> attribute.
+	 * @return the name
+	 */
+	public String getName(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, NAME);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ContactSendEmailProcess.name</code> attribute.
+	 * @return the name
+	 */
+	public String getName()
+	{
+		return getName( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ContactSendEmailProcess.name</code> attribute. 
+	 * @param value the name
+	 */
+	public void setName(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, NAME,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ContactSendEmailProcess.name</code> attribute. 
+	 * @param value the name
+	 */
+	public void setName(final String value)
+	{
+		setName( getSession().getSessionContext(), value );
 	}
 	
 	/**

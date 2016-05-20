@@ -14,7 +14,7 @@
 	<spring:theme code="contact.title" />
 </div> --%>
 <div class="col-sm-6">
-<form:form method="get" commandName="contactForm" action="/merchandisestorefront/merchandise/en/contactus/sendEmail">
+<form:form method="post" commandName="contactForm" action="/merchandisestorefront/merchandise/en/contactus/sendEmail">
 	<br>
 	<formElement:formInputBox idKey="contact.firstName"
 		labelKey="contact.firstName" path="firstName" inputCSS="form-control"
@@ -42,7 +42,7 @@
 			</button>
 			
 		</div>
-			<c:if test=" ${ not empty sendEmailMessage}">${sendEmailMessage}</c:if>
+			
 	</div>
 </form:form>
 </div>

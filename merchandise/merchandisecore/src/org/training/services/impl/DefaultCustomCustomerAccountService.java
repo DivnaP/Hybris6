@@ -46,37 +46,4 @@ public class DefaultCustomCustomerAccountService extends
 		internalSaveCustomer(customerModel);
 	}
 
-
-
-	@Override
-	public void sendEmail(String body, String subject, String email, String firstName, String lastName)
-	{
-		CustomerModel customerModel;
-		if (!getUserService().isAnonymousUser(getUserService().getCurrentUser()))
-		{
-			customerModel = (CustomerModel) getUserService().getCurrentUser();
-
-		}
-		else
-		{
-			customerModel = new CustomerModel();
-			customerModel.setUid(email);
-			customerModel.setName(firstName + " " + lastName);
-		}
-
-		getEventService().publishEvent(myInitializeEvent(new ContactUsEvent(), customerModel, body, subject));
-	}
-
-	protected AbstractCommerceUserEvent myInitializeEvent(final ContactUsEvent event, final CustomerModel customerModel,
-			final String body, final String subject)
-	{
-		event.setBaseStore(getBaseStoreService().getCurrentBaseStore());
-		event.setSite(getBaseSiteService().getCurrentBaseSite());
-		event.setCustomer(customerModel);
-		event.setLanguage(getCommonI18NService().getCurrentLanguage());
-		event.setCurrency(getCommonI18NService().getCurrentCurrency());
-		event.setSubject(subject);
-		event.setBody(body);
-		return event;
-	}
 }

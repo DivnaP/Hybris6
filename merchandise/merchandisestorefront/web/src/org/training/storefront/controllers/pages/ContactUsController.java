@@ -9,6 +9,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyCon
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.training.facades.contact.impl.ContactFacade;
 import org.training.facades.customer.impl.CustomCustomerFacade;
 import org.training.storefront.controllers.ControllerConstants;
 
@@ -47,38 +49,41 @@ public class ContactUsController extends AbstractSearchPageController
 	@Resource(name = "customCustomerFacade")
 	private CustomCustomerFacade customCustomerFacade;
 
-
+	@Resource(name = "contactFacade")
+	private ContactFacade contactFacade;
+	
 	@RequestMapping(value = "/contactus/contact", method = RequestMethod.GET)
 
 	public String getContactPage(final Model model, @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
 			throws CMSItemNotFoundException
 	{
-
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_CONTACT));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		CustomerData cd = null;
 		ContactForm contactForm = new ContactForm();
-		if (customCustomerFacade.getCurrentCustomer() != null)
+		if (!customCustomerFacade.isAnonymus())
 		{
 
 			cd = customCustomerFacade.getCurrentCustomer();
 			contactForm.setFirstName(cd.getFirstName());
 			contactForm.setLastName(cd.getLastName());
 			contactForm.setEmail(cd.getUid());
-		}
-		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_CONTACT));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		if (!cd.getUid().equals(null))
 			model.addAttribute(contactForm);
+		}
+	
 		else
 			model.addAttribute(new ContactForm());
+		
 		return ControllerConstants.Views.Pages.Contact.ContactPage;
+	
 	}
 
-	@RequestMapping(value = "/contactus/sendEmail", method = RequestMethod.GET)
+	@RequestMapping(value = "/contactus/sendEmail", method = RequestMethod.POST)
 
 	public String sendEmail(final Model model, @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam("subject") String subject, @RequestParam("message") String message,@RequestParam("email") String email, @RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+			ContactForm contactForm, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CONTACT_CMS_PAGE));
@@ -86,12 +91,11 @@ public class ContactUsController extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_CONTACT));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
-	
-		customCustomerFacade.getCustomCustomerAccountService().sendEmail(message, subject,email,firstName,lastName);
-		model.addAttribute(new ContactForm());
-		/*model.addAttribute("sendEmailMessage", "Email is successfully sent");
-		return ControllerConstants.Views.Pages.Contact.ContactPage;*/
 		
+	  contactFacade.sendEmail(contactForm.getSubject(),contactForm.getMessage(),contactForm.getEmail(),contactForm.getFirstName()+" "+contactForm.getLastName());
+
+		model.addAttribute(new ContactForm());
+	
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.INFO_MESSAGES_HOLDER, "contact.info.success", null);
 		return REDIRECT_PREFIX + "/";
 	}

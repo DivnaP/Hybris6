@@ -1,144 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2000-2016 hybris AG
- All rights reserved.
-
- This software is the confidential and proprietary information of hybris
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with hybris.
--->
+<!-- [y] hybris Platform Copyright (c) 2000-2016 hybris AG All rights reserved. 
+	This software is the confidential and proprietary information of hybris ("Confidential 
+	Information"). You shall not disclose such Confidential Information and shall 
+	use it only in accordance with the terms of the license agreement you entered 
+	into with hybris. -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-		
-	<context:annotation-config/> 
 
-	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
-	<bean id="defaultSimpleSuggestionFacade" class="org.training.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
-		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
-		<property name="userService" ref="userService"/>
-		<property name="categoryService" ref="categoryService"/>
-		<property name="productService" ref="productService"/>
-		<property name="productConverter" ref="carouselProductConverter"/>
-		<property name="cartService" ref="cartService"/>
-		
+	<context:annotation-config />
+
+	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade" />
+	<bean id="defaultSimpleSuggestionFacade"
+		class="org.training.facades.suggestion.impl.DefaultSimpleSuggestionFacade">
+		<property name="simpleSuggestionService" ref="simpleSuggestionService" />
+		<property name="userService" ref="userService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="productService" ref="productService" />
+		<property name="productConverter" ref="carouselProductConverter" />
+		<property name="cartService" ref="cartService" />
+
 	</bean>
-	
- 	
-	<bean id="productWishlistConvertFacade" class="org.training.facades.product.ProductWishlistConvertFacade" >
-		<property name="productConverter" ref="productConverter"/>
-		
-		
+
+
+	<bean id="productWishlistConvertFacade"
+		class="org.training.facades.product.ProductWishlistConvertFacade">
+		<property name="productConverter" ref="productConverter" />
+
+
 	</bean>
-	
-<bean id="productInWishlistPopulator" class="org.training.facades.populators.ProductInWishlistPopulator">
-	<property name="wishlistFacade" ref="wishlistFacade"/>
-</bean>
 
-	 <bean id="customCustomerPopulator" class="org.training.facades.populators.CustomCustomerPopulator"/>
-	
+	<bean id="productInWishlistPopulator"
+		class="org.training.facades.populators.ProductInWishlistPopulator">
+		<property name="wishlistFacade" ref="wishlistFacade" />
+	</bean>
 
-	 <bean parent="modifyPopulatorList">
-        <property name="list" ref="productConverter"/>
-        <property name="add"  ref="productInWishlistPopulator"/>
-    </bean>
-    
-     <bean parent="modifyPopulatorList">
-        <property name="list" ref="customerConverter"/>
-        <property name="add"  ref="customCustomerPopulator"/>
-    </bean>
-    
-    
+	<bean id="customCustomerPopulator" class="org.training.facades.populators.CustomCustomerPopulator" />
+
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="productInWishlistPopulator" />
+	</bean>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="customerConverter" />
+		<property name="add" ref="customCustomerPopulator" />
+	</bean>
+
+
 	<bean id="wishlistFacade" class="org.training.facades.wishlist.impl.WishlistFacade">
-	
-		<property name="wishlistService" ref="wishlistService"/>
-	     <property name="userService" ref="userService"/>
-           <property name="productService" ref="productService"/>
+
+		<property name="wishlistService" ref="wishlistService" />
+		<property name="userService" ref="userService" />
+		<property name="productService" ref="productService" />
 	</bean>
-	
-	<bean id="customCustomerFacade" class="org.training.facades.customer.impl.CustomCustomerFacade" parent="defaultCustomerFacade">
-	
-		<property name="customCustomerAccountService" ref="customCustomerAccountService"/>
-		
+	<bean id="contactFacade" class="org.training.facades.contact.impl.ContactFacade">
+		<property name="eventService" ref="eventService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+
+	</bean>
+
+	<bean id="customCustomerFacade" class="org.training.facades.customer.impl.CustomCustomerFacade"
+		parent="defaultCustomerFacade">
+
+		<property name="customCustomerAccountService" ref="customCustomerAccountService" />
+
 	</bean>
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
-				<ref bean="productPricePopulator"/>
+				<ref bean="productPricePopulator" />
 			</list>
 		</property>
 	</bean>
 
-	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter" />
 	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
-		<lookup-method name="createTarget" bean="variantOptionData"/>
+		<lookup-method name="createTarget" bean="variantOptionData" />
 		<property name="populators">
 			<list>
-				<ref bean="acceleratorVariantOptionDataPopulator"/>
+				<ref bean="acceleratorVariantOptionDataPopulator" />
 			</list>
 		</property>
 	</bean>
 
-	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>
-	<bean id="defaultAcceleratorVariantOptionDataPopulator"  class="org.training.facades.populators.AcceleratorVariantOptionDataPopulator"
-	      parent="variantOptionDataPopulator" >
-		<property name="mediaService" ref="mediaService"/>
-		<property name="mediaContainerService" ref="mediaContainerService"/>
-		<property name="typeService" ref="typeService"/>
-		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator" />
+	<bean id="defaultAcceleratorVariantOptionDataPopulator"
+		class="org.training.facades.populators.AcceleratorVariantOptionDataPopulator"
+		parent="variantOptionDataPopulator">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="typeService" ref="typeService" />
+		<property name="imageFormatMapping" ref="imageFormatMapping" />
 		<property name="variantAttributeMapping">
 			<map>
-				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch" />
 			</map>
 		</property>
 	</bean>
 
 
-	<alias name="acceleratorGenderConverter" alias="genderConverter"/> 
+	<alias name="acceleratorGenderConverter" alias="genderConverter" />
 	<bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="org.training.facades.product.data.GenderData"/>
-			<property name="populators">
-				<list>
-					<ref bean="genderDataPopulator"/>
-				</list>
-			</property>
+		<property name="targetClass" value="org.training.facades.product.data.GenderData" />
+		<property name="populators">
+			<list>
+				<ref bean="genderDataPopulator" />
+			</list>
+		</property>
 	</bean>
 
-	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator"/>
-	<bean id="defaultGenderDataPopulator" class="org.training.facades.populators.GenderDataPopulator" >
-		<property name="typeService" ref="typeService"/>
+	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator" />
+	<bean id="defaultGenderDataPopulator" class="org.training.facades.populators.GenderDataPopulator">
+		<property name="typeService" ref="typeService" />
 	</bean>
 
-	<bean id="apparelProductPopulator" class="org.training.facades.populators.ApparelProductPopulator" >
-		<property name="genderConverter" ref="genderConverter"/>
+	<bean id="apparelProductPopulator" class="org.training.facades.populators.ApparelProductPopulator">
+		<property name="genderConverter" ref="genderConverter" />
 	</bean>
 
 	<!-- Add the apparelProductPopulator to the productConverter -->
 	<bean parent="modifyPopulatorList">
-		<property name="list" ref="productConverter"/>
-		<property name="add" ref="apparelProductPopulator"/>
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="apparelProductPopulator" />
 	</bean>
 
 	<!-- accelerator Image Format Mappings -->
-	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping" />
 	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
 		<property name="mapping">
 			<map>
-				<entry key="superZoom" value="1200Wx1200H"/>
-				<entry key="zoom" value="515Wx515H"/>
-				<entry key="store" value="365Wx246H"/>
-				<entry key="product" value="300Wx300H"/>
-				<entry key="thumbnail" value="96Wx96H"/>
-				<entry key="cartIcon" value="65Wx65H"/>
-				<entry key="styleSwatch" value="30Wx30H"/>
+				<entry key="superZoom" value="1200Wx1200H" />
+				<entry key="zoom" value="515Wx515H" />
+				<entry key="store" value="365Wx246H" />
+				<entry key="product" value="300Wx300H" />
+				<entry key="thumbnail" value="96Wx96H" />
+				<entry key="cartIcon" value="65Wx65H" />
+				<entry key="styleSwatch" value="30Wx30H" />
 			</map>
 		</property>
 	</bean>
@@ -167,66 +172,98 @@
 		</property>
 	</bean>
 
-	<bean id="customerEmailContext" class="org.training.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
+	<bean id="customerEmailContext"
+		class="org.training.facades.process.email.context.CustomerEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
 	</bean>
-	<bean id="contactSendEmailContext" class="org.training.facades.process.email.context.ContactSendEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
+	<bean id="contactSendEmailContext"
+		class="org.training.facades.process.email.context.ContactSendEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		
 	</bean>
-<bean id="customerAlertEmailContext" class="org.training.facades.process.email.context.CustomerAlertEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
+	<bean id="customerAlertEmailContext"
+		class="org.training.facades.process.email.context.CustomerAlertEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
 	</bean>
-	<bean id="forgottenPasswordEmailContext" class="org.training.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
-	</bean>
-	
-	<bean id="orderNotificationEmailContext" class="org.training.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	
-	<bean id="deliverySentEmailContext" class="org.training.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="readyForPickupEmailContext" class="org.training.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="orderCancelledEmailContext" class="org.training.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	
-	<bean id="orderRefundEmailContext" class="org.training.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	<bean id="consignmentCollectionReminderEmailContext" class="org.training.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
-        <property name="consignmentConverter" ref="consignmentConverter"/>
-        <property name="formatFactory" ref="formatFactory"/>
-        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
-        <property name="orderConverter" ref="orderConverter"/>
-    </bean>
-
-	<bean id="orderPartiallyModifiedEmailContext" class="org.training.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-		<property name="orderEntryConverter" ref="orderEntryConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>		
+	<bean id="forgottenPasswordEmailContext"
+		class="org.training.facades.process.email.context.ForgottenPasswordEmailContext"
+		parent="customerEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
 	</bean>
 
-	<bean id="orderPartiallyCanceledEmailContext" class="org.training.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	<bean id="orderNotificationEmailContext"
+		class="org.training.facades.process.email.context.OrderNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
 	</bean>
 
-	<bean id="orderPartiallyRefundedEmailContext" class="org.training.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	<bean id="deliverySentEmailContext"
+		class="org.training.facades.process.email.context.DeliverySentEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
 	</bean>
 
-	<bean id="notPickedUpConsignmentCanceledEmailContext" class="org.training.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>
+	<bean id="readyForPickupEmailContext"
+		class="org.training.facades.process.email.context.ReadyForPickupEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
 	</bean>
 
-	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
-	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="org.training.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator" >
-		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	<bean id="orderCancelledEmailContext"
+		class="org.training.facades.process.email.context.OrderCancelledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
 	</bean>
 
-	<bean id="genderData" class="org.training.facades.product.data.GenderData" scope="prototype"/>
+	<bean id="orderRefundEmailContext"
+		class="org.training.facades.process.email.context.OrderRefundEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext"
+		class="org.training.facades.process.email.context.ConsignmentCollectionReminderEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
+		<property name="formatFactory" ref="formatFactory" />
+		<property name="customerServiceUncollectedConsignmentStrategy"
+			ref="customerServiceUncollectedConsignmentStrategy" />
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+
+	<bean id="orderPartiallyModifiedEmailContext"
+		class="org.training.facades.process.email.context.OrderPartiallyModifiedEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+		<property name="orderEntryConverter" ref="orderEntryConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext"
+		class="org.training.facades.process.email.context.OrderPartiallyCanceledEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext"
+		class="org.training.facades.process.email.context.OrderPartiallyRefundedEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext"
+		class="org.training.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		class="org.training.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter" />
+	</bean>
+
+	<bean id="genderData" class="org.training.facades.product.data.GenderData"
+		scope="prototype" />
 </beans>

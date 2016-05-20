@@ -12,6 +12,7 @@ import de.hybris.platform.servicelayer.util.ServicesUtil;
 import org.training.core.event.ContactUsEvent;
 import org.training.core.model.ContactSendEmailProcessModel;
 
+
 /**
  * @author popovicd
  *
@@ -20,6 +21,7 @@ public class ContactUsEventListener extends AbstractAcceleratorSiteEventListener
 {
 
 	private ModelService modelService;
+
 	/**
 	 * @return the modelService
 	 */
@@ -29,7 +31,8 @@ public class ContactUsEventListener extends AbstractAcceleratorSiteEventListener
 	}
 
 	/**
-	 * @param modelService the modelService to set
+	 * @param modelService
+	 *           the modelService to set
 	 */
 	public void setModelService(ModelService modelService)
 	{
@@ -45,7 +48,8 @@ public class ContactUsEventListener extends AbstractAcceleratorSiteEventListener
 	}
 
 	/**
-	 * @param businessProcessService the businessProcessService to set
+	 * @param businessProcessService
+	 *           the businessProcessService to set
 	 */
 	public void setBusinessProcessService(BusinessProcessService businessProcessService)
 	{
@@ -62,30 +66,31 @@ public class ContactUsEventListener extends AbstractAcceleratorSiteEventListener
 		return site.getChannel();
 	}
 
-	/* (non-Javadoc)
-	 * @see de.hybris.platform.commerceservices.event.AbstractSiteEventListener#onSiteEvent(de.hybris.platform.servicelayer.event.events.AbstractEvent)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * de.hybris.platform.commerceservices.event.AbstractSiteEventListener#onSiteEvent(de.hybris.platform.servicelayer.
+	 * event.events.AbstractEvent)
 	 */
 	@Override
 	protected void onSiteEvent(ContactUsEvent event)
 	{
-		final ContactSendEmailProcessModel cepm = (ContactSendEmailProcessModel)getBusinessProcessService().createProcess(
-						"contactSendEmailProcess-" + event.getCustomer().getUid() + "-" + System.currentTimeMillis(),
-						"contactSendEmailProcess2");
-	/*	final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel = (StoreFrontCustomerProcessModel	) getBusinessProcessService()
-				.createProcess(
-						"contactSendEmailProcess-" + event.getCustomer().getUid() + "-" + System.currentTimeMillis(),
-						"contactSendEmailProcess");*/
-		cepm.setSite(event.getSite());
+		final ContactSendEmailProcessModel cepm = (ContactSendEmailProcessModel) getBusinessProcessService()
+				.createProcess("contactSendEmailProcess-" + System.currentTimeMillis(), "contactSendEmailProcess2");
 
-		cepm.setCustomer(event.getCustomer());
+		cepm.setSite(event.getSite());
 		cepm.setLanguage(event.getLanguage());
-		cepm.setCurrency(event.getCurrency());
+
 		cepm.setStore(event.getBaseStore());
 		cepm.setBody(event.getBody());
 		cepm.setSubject(event.getSubject());
+		cepm.setName(event.getName());
+		cepm.setEmail(event.getEmail());
+
 		getModelService().save(cepm);
 		getBusinessProcessService().startProcess(cepm);
-		
+
 	}
 
 }

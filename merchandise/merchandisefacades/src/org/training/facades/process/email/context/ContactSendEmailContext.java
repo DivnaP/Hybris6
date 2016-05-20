@@ -33,9 +33,8 @@ import org.training.core.model.*;
  */
 public class ContactSendEmailContext extends AbstractEmailContext<ContactSendEmailProcessModel>
 {
-	private Converter<UserModel, CustomerData> customerConverter;
-	private CustomerData customerData;
-	String from;
+
+	ContactSendEmailProcessModel cspm;
 
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getToEmail()
@@ -50,64 +49,66 @@ public class ContactSendEmailContext extends AbstractEmailContext<ContactSendEma
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getFromEmail()
 	 */
-	@Override
-	public String getFromEmail()
-	{
-		
-		return customerData.getUid();
-	}
-
+/* (non-Javadoc)
+ * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getFromEmail()
+ */
+@Override
+public String getFromEmail()
+{
+	// YTODO Auto-generated method stub
+	return cspm.getEmail();
+}
+/* (non-Javadoc)
+ * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getFromDisplayName()
+ */
+@Override
+public String getFromDisplayName()
+{
+	// YTODO Auto-generated method stub
+	return cspm.getName();
+}
 	@Override
 	public void init(final ContactSendEmailProcessModel contactSendEmailProcessModel, final EmailPageModel emailPageModel)
 	{
 		super.init(contactSendEmailProcessModel, emailPageModel);
-		customerData = getCustomerConverter().convert(getCustomer(contactSendEmailProcessModel));
+		cspm= contactSendEmailProcessModel;
 		put("subject",contactSendEmailProcessModel.getSubject());
 		put("body",contactSendEmailProcessModel.getBody());
-	//  from = emailPageModel.getFromEmail();
+		put("name",contactSendEmailProcessModel.getName());
+		put("email",contactSendEmailProcessModel.getEmail());
+		put("fromEmail",contactSendEmailProcessModel.getEmail());
+		//put("fromDisplayName",contactSendEmailProcessModel.getName());
+		put("displayName",contactSendEmailProcessModel.getName());
 	  
 	}
-
+	/* (non-Javadoc)
+	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getSite(de.hybris.platform.processengine.model.BusinessProcessModel)
+	 */
 	@Override
-	protected BaseSiteModel getSite(final ContactSendEmailProcessModel contactSendEmailProcessModel)
+	protected BaseSiteModel getSite(ContactSendEmailProcessModel businessProcessModel)
 	{
-		return contactSendEmailProcessModel.getSite();
+		
+		return businessProcessModel.getSite();
 	}
-
-
-
-	protected Converter<UserModel, CustomerData> getCustomerConverter()
-	{
-		return customerConverter;
-	}
-
-	@Required
-	public void setCustomerConverter(final Converter<UserModel, CustomerData> customerConverter)
-	{
-		this.customerConverter = customerConverter;
-	}
-
-	public CustomerData getCustomer()
-	{
-		return customerData;
-	}
-
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getCustomer(de.hybris.platform.processengine.model.BusinessProcessModel)
 	 */
 	@Override
 	protected CustomerModel getCustomer(ContactSendEmailProcessModel businessProcessModel)
 	{
+		// YTODO Auto-generated method stub
 		return businessProcessModel.getCustomer();
 	}
-
 	/* (non-Javadoc)
 	 * @see de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext#getEmailLanguage(de.hybris.platform.processengine.model.BusinessProcessModel)
 	 */
 	@Override
-	protected LanguageModel getEmailLanguage(final ContactSendEmailProcessModel businessProcessModel)
+	protected LanguageModel getEmailLanguage(ContactSendEmailProcessModel businessProcessModel)
 	{
+		// YTODO Auto-generated method stub
 		return businessProcessModel.getLanguage();
 	}
+
+
 
 }

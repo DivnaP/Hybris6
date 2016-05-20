@@ -11,6 +11,7 @@ import de.hybris.platform.commercefacades.user.data.RegisterData;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.TitleModel;
+import de.hybris.platform.core.model.user.UserModel;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Assert;
@@ -73,5 +74,11 @@ public class CustomCustomerFacade extends DefaultCustomerFacade
 		customer.setOriginalUid(customerData.getDisplayUid());
 		getCustomCustomerAccountService().updateCustomProfile(customer, customerData.getTitleCode(), name, customerData.getUid(),customerData.getBirthdate());
 	
+	}
+	
+	public boolean isAnonymus(){
+		
+	return	getUserService().isAnonymousUser(getUserService().getCurrentUser());
+		
 	}
 }
